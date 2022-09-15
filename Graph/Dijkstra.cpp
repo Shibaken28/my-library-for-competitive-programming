@@ -1,4 +1,11 @@
-using namespace std;
+
+/*
+ダイクストラ法
+Verify
+https://onlinejudge.u-aizu.ac.jp/problems/GRL_1_A
+*/
+
+
 #include <iostream> // cout, endl, cin
 #include <string> // string, to_string, stoi
 #include <vector> // vector
@@ -25,11 +32,7 @@ using namespace std;
 #include <array>
 #include <fstream>
 #include <sstream>
-
-/*
-Verify
-https://onlinejudge.u-aizu.ac.jp/problems/GRL_1_A
-*/
+using namespace std;
 
 struct Edge{
     int to;
