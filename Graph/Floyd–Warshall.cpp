@@ -44,6 +44,7 @@ vector<vector<long>> floydWarshall(vector<vector<long>> &G){
         for(int b=0;b<N;b++){
             for(int c=0;c<N;c++){
                 long d = H[b][a] + H[a][c];
+                if(H[b][a]==INF||H[a][c]==INF)d = INF;
                 if(H[b][c] > d){
                     H[b][c] = d;
                 }
@@ -74,7 +75,7 @@ int main(){
     }
     for(auto&A:F){
         for(int i=0;i<N;i++){
-            if(A[i]<INF/2){
+            if(A[i]<INF){
                 cout<<A[i];
             }else{
                 cout<<"INF";
