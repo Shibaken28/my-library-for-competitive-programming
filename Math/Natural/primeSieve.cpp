@@ -1,6 +1,7 @@
 /*
 素数篩+素数判定+素因数分解+(前計算あり)高速素因数
 verify ?
+高速約数列挙ができていない
 https://atcoder.jp/contests/math-and-algorithm/submissions/34876840
 */
 #include <iostream> // cout, endl, cin
@@ -133,33 +134,49 @@ struct primeSieve{
         }
         return A;
     }
+
     //約数列挙
     vector<long> factors(long x){
-        if(x>N*N)return factorsNaive(x); //未定義
-        if(x<=N)if(isPrime(x)){
-            return {1,x};
-        }
-        vector<long> A(0);
-        A.push_back(1);
-        for(const auto&p:primes){
-            int cnt=0;
-            while(x%p==0){
-                x/=p;cnt++;
-            }
-            int s=A.size();
-            for(int i=0;i<s;i++){
-                long a=1;
-                for(int j=0;j<cnt;j++){
-                    a*=p;
-                    A.push_back(a*A[i]);
+        if(x>N*N){
+            return factorsNaive(x); //未定義
+        /*
+        }else if(x<=N){
+            vector<long> A = {1};
+            auto pf = factorization(x);
+            for (auto p : pf) {
+                int s = (int)A.size();
+                for (int i = 0; i < s; ++i) {
+                    int v = 1;
+                    for (int j = 0; j < p.second; ++j) {
+                        v *= p.first;
+                        res.push_back(res[i] * v);
+                    }
                 }
             }
-            if(x==1)break;
-        }
-        if(x>1){
-            int s=A.size();
-            for(int i=0;i<s;i++){
-                A.push_back(A[i]*x);
+            */
+        }else{
+            vector<long> A(0);
+            A.push_back(1);
+            for(const auto&p:primes){
+                int cnt=0;
+                while(x%p==0){
+                    x/=p;cnt++;
+                }
+                int s=A.size();
+                for(int i=0;i<s;i++){
+                    long a=1;
+                    for(int j=0;j<cnt;j++){
+                        a*=p;
+                        A.push_back(a*A[i]);
+                    }
+                }
+                if(x==1)break;
+            }
+            if(x>1){
+                int s=A.size();
+                for(int i=0;i<s;i++){
+                    A.push_back(A[i]*x);
+                }
             }
         }
         sort(A.begin(),A.end());
