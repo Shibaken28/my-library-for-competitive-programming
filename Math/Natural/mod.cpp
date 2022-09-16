@@ -1,10 +1,20 @@
 /*
 modint構造体
+combination
+
 verify
 
 modpow
 https://onlinejudge.u-aizu.ac.jp/problems/NTL_1_B
 
+combination mod
+https://atcoder.jp/contests/math-and-algorithm/submissions/34884143
+
+パスカル
+https://atcoder.jp/contests/math-and-algorithm/submissions/34885355
+
+lucas
+https://atcoder.jp/contests/arc117/submissions/34885971
 
 */
 #include <iostream> // cout, endl, cin
@@ -96,9 +106,93 @@ template<int MOD> struct Fp {
 const int MOD = 1000000007;
 using mint = Fp<MOD>;
 
-int main(){
-    mint a,b;
-    cin>>a.val>>b.val;
-    cout<<modpow(a,b.val)<<endl;
-}
+/*
+有限体Tにおけるcombination
+mod <= N のとき未定義
+*/
+template<class T> struct Combination{
+    int N;
+    vector<T> fac;//階乗
+    vector<T> finv;//階乗の逆元
+    Combination(int N){
+        this->N = N;
+        init();
+    }
+    void init(){
+        fac.resize(N);
+        finv.resize(N);
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        for(int i=2;i<N;i++){
+            fac[i] = fac[i-1] * i;
+            finv[i] = finv[i-1] / i;
+        }
+    }
+    /*aCbの計算*/
+    T com(int a,int b){
+        if(a < b)return 0;
+        return fac[a] * finv[b] * finv[a-b];
+    }
+};
 
+struct Pascal{
+    //tri[a][b] = aCb
+    vector<vector<long>> tri;
+    int N;
+    Pascal(int N){
+        this->N = N;
+        init();
+    }
+    void init(){
+        tri.clear();
+        tri.push_back({1});
+        for(int i=1;i<N;i++){
+            vector<long> add(0);
+            add.push_back(1);
+            for(int k=0;k<i-1;k++){
+                add.push_back(tri.back()[k]+tri.back()[k+1]);
+            }
+            add.push_back(1);
+            tri.push_back(add);
+        }
+    }
+    long com(int a,int b){
+        if(a<b)return 0;
+        return tri[a][b];
+    }
+};
+
+/*
+MODは素数
+*/
+template<int MOD> struct Lucas{
+    Pascal pas{MOD};
+    Lucas(){
+    }
+    Fp<MOD> com(long a,long b){
+        if(a<b)return 0;
+        Fp<MOD> ret{1};
+        while(a>0){
+            ret *=pas.com(a%MOD,b%MOD);
+            a/=MOD;
+            b/=MOD;
+        }
+        return ret;
+    }
+};
+
+int main(){
+    Lucas<3> lucas;
+    long N;cin>>N;
+    Fp<3> w=0;
+    map<char,long> mp = {{'R',0},{'W',1},{'B',2}};
+    for(int i=0;i<N;i++){
+        char c;cin>>c;
+        auto a=lucas.com(N-1,i);
+        w+=a*mp[c];
+    }
+    if(N%2==0)w=-w;
+    if(w==0)cout<<"R"<<endl;    
+    if(w==1)cout<<"W"<<endl;
+    if(w==2)cout<<"B"<<endl;
+}
