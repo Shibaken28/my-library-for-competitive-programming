@@ -1,5 +1,8 @@
 /*
 imos
+
+verify
+https://atcoder.jp/contests/abc014/submissions/34912295
 */
 
 #include <iostream> // cout, endl, cin
@@ -31,22 +34,39 @@ imos
 using namespace std;
 
 
-template<class T> struct imos{
-    
-}
+template<class T> struct Imos{
+    vector<T> A;
+    int N;
+    constexpr Imos(int N){
+        this -> N = N;
+        init();
+    }
+    constexpr void init(){
+        A.resize(N+1);
+        fill(A.begin(),A.end(),0);
+    }
+    /*[l,r]にxを加算*/
+    constexpr void add(int l,int r,T x){
+        A[l] += x;
+        A[r+1] += -x;
+    }
+    constexpr void calc(){
+        for(int i=0;i<N;i++){
+            A[i+1] += A[i];
+        }
+    }
+    constexpr T get(int i){
+        return A[i];
+    }
+};
 
 int main(){
-    Lucas<3> lucas;
-    long N;cin>>N;
-    Fp<3> w=0;
-    map<char,long> mp = {{'R',0},{'W',1},{'B',2}};
+    int N;cin>>N;
+    Imos<int> imos(1000001);
     for(int i=0;i<N;i++){
-        char c;cin>>c;
-        auto a=lucas.com(N-1,i);
-        w+=a*mp[c];
+        int a,b;cin>>a>>b;
+        imos.add(a,b,1);
     }
-    if(N%2==0)w=-w;
-    if(w==0)cout<<"R"<<endl;    
-    if(w==1)cout<<"W"<<endl;
-    if(w==2)cout<<"B"<<endl;
+    imos.calc();
+    cout<< *(max_element(imos.A.begin(),imos.A.end())) << endl;
 }

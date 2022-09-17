@@ -50,13 +50,6 @@ template<class T> bool isExist(set<T> &A,T x){
     }
     return *it == x;
 }
-template<class T1,class T2> bool isExist(map<T1,T2> &A,T1 x){
-    auto it = A.lower_bound(x);
-    if(it==A.end()){
-        return false;
-    }
-    return *it == x;
-}
 
 /*
 Aに存在するx以上の数
@@ -70,12 +63,6 @@ template<class T> bool lowerElement(vector<T> &A,T x,T &find,int &index){
     return true;
 }
 template<class T> bool lowerElement(set<T> &A,T x,T &find){
-    auto it = A.lower_bound(x);
-    if(it==A.end())return false;
-    find = *it;
-    return true;
-}
-template<class T1,class T2>  bool lowerElement(map<T1,T2> &A,T1 x,T1 &find){
     auto it = A.lower_bound(x);
     if(it==A.end())return false;
     find = *it;
@@ -96,12 +83,6 @@ template<class T> bool upperElement(vector<T> &A,T x,T &find,int &index){
     return true;
 }
 template<class T> bool upperElement(set<T> &A,T x,T &find){
-    auto it = A.upper_bound(x);
-    if(it == A.end())return false;
-    find = *it;
-    return true;
-}
-template<class T1,class T2>  bool upperElement(map<T1,T2> &A,T1 x,T1 &find){
     auto it = A.upper_bound(x);
     if(it == A.end())return false;
     find = *it;
@@ -129,13 +110,6 @@ template<class T> bool underElement(set<T> &A,T x,T &find){
     find = *it;
     return true;
 }
-template<class T1,class T2> bool underElement(map<T1,T2> &A,T1 x,T1 &find){
-    auto it = A.upper_bound(x);
-    if(it == A.begin())return false;
-    it--;
-    find = *it;
-    return true;
-}
 
 /*
 Aに存在するxより小さい数
@@ -150,13 +124,6 @@ template<class T> bool lessElement(vector<T> &A,T x,T &find,int &index){
     return true;
 }
 template<class T> bool lessElement(set<T> &A,T x,T &find){
-    auto it = A.lower_bound(x);
-    if(it == A.begin())return false;
-    it--;
-    find = *it;
-    return true;
-}
-template<class T1,class T2> bool lessElement(map<T1,T2> &A,T1 x,T1 &find){
     auto it = A.lower_bound(x);
     if(it == A.begin())return false;
     it--;
