@@ -17,6 +17,7 @@ lucas
 https://atcoder.jp/contests/arc117/submissions/34885971
 
 */
+
 #include <iostream> // cout, endl, cin
 #include <string> // string, to_string, stoi
 #include <vector> // vector
