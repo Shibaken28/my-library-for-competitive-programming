@@ -136,6 +136,10 @@ template<class T> struct Combination{
     }
 };
 
+
+
+
+
 struct Pascal{
     //tri[a][b] = aCb
     vector<vector<long>> tri;
@@ -163,6 +167,10 @@ struct Pascal{
     }
 };
 
+
+
+
+
 /*
 MODは素数
 */
@@ -181,6 +189,11 @@ template<int MOD> struct Lucas{
         return ret;
     }
 };
+
+
+
+
+
 
 int main(){
     Lucas<3> lucas;

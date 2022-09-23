@@ -1,3 +1,9 @@
+/*
+matrix
+verify
+https://atcoder.jp/contests/math-and-algorithm/submissions/35059887
+*/
+
 #include <iostream> // cout, endl, cin
 #include <string> // string, to_string, stoi
 #include <vector> // vector
@@ -180,10 +186,6 @@ template<int MOD> struct Fp {
         return t;
     }
 };
-
-const int MOD = 1000000007;
-using mint = Fp<MOD>;
-
 
 
 
@@ -446,20 +448,22 @@ namespace MatrixLib {
 }
 
 using namespace MatrixLib;
-/*
-A_i+1 = 4 + 4A_i
-*/
+
+const int MOD = 1000000000;
+using mint = Fp<MOD>;
+
+
 
 int main(void){
     long N;cin>>N;
     Matrix<mint> mat(2,2);
-    mat[0][0] = 4;
-    mat[0][1] = 4;
-    mat[1][0] = 0;
-    mat[1][1] = 1;
+    mat[0][0] = 1;
+    mat[0][1] = 1;
+    mat[1][0] = 1;
+    mat[1][1] = 0;
     Matrix<mint> r(2,1);
-    r[0][0] = 0;
+    r[0][0] = 1;
     r[1][0] = 1;
-    auto m2 = mat.pow(N) * r;
-    cout<<m2[0][0]+1<<endl;
+    auto m2 = mat.pow(N-2) * r;
+    cout<<m2[0][0]<<endl;
 }
