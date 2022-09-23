@@ -449,21 +449,26 @@ namespace MatrixLib {
 
 using namespace MatrixLib;
 
-const int MOD = 1000000000;
+const int MOD = 1000000007;
 using mint = Fp<MOD>;
 
 
+/*
+00
+01
+10
+11
 
+*/
 int main(void){
-    long N;cin>>N;
-    Matrix<mint> mat(2,2);
-    mat[0][0] = 1;
-    mat[0][1] = 1;
-    mat[1][0] = 1;
-    mat[1][1] = 0;
-    Matrix<mint> r(2,1);
-    r[0][0] = 1;
-    r[1][0] = 1;
-    auto m2 = mat.pow(N-2) * r;
-    cout<<m2[0][0]<<endl;
+    long K,N;cin>>K>>N;
+    Matrix<mint> mat(1<<K,1<<K);
+    for(int i=0;i<(1<<K);i++){
+        
+    }
+    Matrix<mint> r(1<<K,1);
+    auto m2 = mat.pow(N-3) * r;
+    mint sum = 0;
+    for(int i=0;i<m2.row;i++)sum += m2[i][0];
+    cout<<sum<<endl;
 }
