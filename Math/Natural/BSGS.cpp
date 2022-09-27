@@ -109,6 +109,7 @@ long BSGS(long a,long b,long p){
     for(long i=0;i<=m;i++){
         long d = (modPow(am,i,p)*b) % p;
         if(mp.count(d)){
+            if(i==0&&mp[d]==0)continue;
             x = i*m + mp[d];
             break;
         }
