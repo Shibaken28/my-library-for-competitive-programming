@@ -1,3 +1,8 @@
+/*
+verify
+https://atcoder.jp/contests/arc042/tasks/arc042_d
+*/
+
 #include <iostream> // cout, endl, cin
 #include <string> // string, to_string, stoi
 #include <vector> // vector
