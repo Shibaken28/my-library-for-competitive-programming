@@ -175,7 +175,7 @@
 <li>issueを出してくださると直すかもしれません．</li>
 </ul>
 <h2 id="方言"><a class="header" href="#方言">方言</a></h2>
-<p><code>git subtree push --prefix docs/book/ origin gh-pagesv</code></p>
+<p><code>git subtree push --prefix docs/book/ origin gh-pages</code></p>
 <h1 id="ダイクストラ法"><a class="header" href="#ダイクストラ法">ダイクストラ法</a></h1>
 <h2 id="概要"><a class="header" href="#概要">概要</a></h2>
 <p>重みが非負の辺のみで構成されるグラフで，2頂点間のパスの内の辺の重みの総和が最小となる値を求めるアルゴリズム</p>
@@ -407,7 +407,16 @@ vector&lt;vector&lt;long&gt;&gt; floydWarshall(vector&lt;vector&lt;long&gt;&gt; 
 <h1 id="列挙"><a class="header" href="#列挙">列挙</a></h1>
 <h1 id="順列列挙"><a class="header" href="#順列列挙">順列列挙</a></h1>
 <h2 id="概要-5"><a class="header" href="#概要-5">概要</a></h2>
-<p><code>next_permutation</code>を使って要素が\(0,1,2,3,...,N\)からなる長さ\(N\)の順列を列挙する．</p>
+<ul>
+<li>\(0,1,2,3,...,N-1\)の要素数\(N\)個の順列，要素の重複なし</li>
+<li>\(0,1,2,3,...,N-1\)のから\(U\)個選んだ順列，要素の重複なし</li>
+<li>\(0,1,2,3,...,N-1\)のから\(U\)個選んだ順列，要素の重複あり</li>
+<li>\(0,1,2,3,...,N-1\)のから\(U\)個選んだ組み合わせ，要素の重複なし</li>
+<li>\(0,1,2,3,...,N-1\)のから\(U\)個選んだ組み合わせ，要素の重複あり</li>
+</ul>
+<p>を求める</p>
+<h2 id="計算量-4"><a class="header" href="#計算量-4">計算量</a></h2>
+<p>よくわからん</p>
 <pre><code class="language-cpp">vector&lt;vector&lt;int&gt;&gt; permutations(int N){
     vector&lt;int&gt; array(N);
     vector&lt;vector&lt;int&gt;&gt; A(0);
@@ -417,6 +426,62 @@ vector&lt;vector&lt;long&gt;&gt; floydWarshall(vector&lt;vector&lt;long&gt;&gt; 
     }while(next_permutation(array.begin(),array.end()));
     return A;
 }
+
+
+
+vector&lt;vector&lt;int&gt;&gt; permutation(int N,int U,bool h=false){
+    //0,1,2,3,...,N-1のN個からU個選ぶ順列
+    vector&lt;vector&lt;int&gt;&gt; A(0);
+    auto fun = [&amp;h,&amp;A,&amp;N,&amp;U](auto &amp;fun,vector&lt;int&gt; &amp;B)-&gt;void{
+        if((int)B.size()==U){
+            auto C=B;
+            do{
+                A.push_back(C);
+            }while(next_permutation(C.begin(),C.end()));
+            return;
+        }
+        int s = (h?0:-1);
+        if(!B.empty())s = B.back();
+        for(int x=s+(h?0:1);x&lt;N;x++){
+            B.push_back(x);
+            fun(fun,B);
+            B.pop_back();
+        }
+    };
+    vector&lt;int&gt; C={};
+    fun(fun,C);
+    return A;
+}
+
+vector&lt;vector&lt;int&gt;&gt; combination(int N,int U,bool h=false){
+    //0,1,2,3,...,N-1のN個からU個選ぶ組み合わせ順列
+    vector&lt;vector&lt;int&gt;&gt; A(0);
+    auto fun = [&amp;h,&amp;A,&amp;N,&amp;U](auto &amp;fun,vector&lt;int&gt; &amp;B)-&gt;void{
+        if((int)B.size()==U){
+            auto C=B;
+            A.push_back(B);
+            return;
+        }
+        int s = (h?0:-1);
+        if(!B.empty())s = B.back();
+        for(int x=s+(h?0:1);x&lt;N;x++){
+            B.push_back(x);
+            fun(fun,B);
+            B.pop_back();
+        }
+    };
+    vector&lt;int&gt; C={};
+    fun(fun,C);
+    return A;
+}
+
+int main(void){
+    cout&lt;&lt;permutation(5,3,false)&lt;&lt;endl;//重複なし順列
+    cout&lt;&lt;permutation(5,3,true)&lt;&lt;endl; //重複あり順列
+    cout&lt;&lt;combination(5,3,false)&lt;&lt;endl;//重複なし組み合わせ
+    cout&lt;&lt;combination(5,3,true)&lt;&lt;endl; //重複あり組み合わせ
+}
+
 </code></pre>
 <h1 id="整数"><a class="header" href="#整数">整数</a></h1>
 <h1 id="素数判定"><a class="header" href="#素数判定">素数判定</a></h1>
@@ -427,7 +492,7 @@ vector&lt;vector&lt;long&gt;&gt; floydWarshall(vector&lt;vector&lt;long&gt;&gt; 
 <h1 id="パスカルの3角形"><a class="header" href="#パスカルの3角形">パスカルの3角形</a></h1>
 <h2 id="概要-6"><a class="header" href="#概要-6">概要</a></h2>
 <p>パスカルの三角形によって二項係数\({}_a \mathrm{C}_b (0\leq a,b\leq N )\)を求める．</p>
-<h2 id="計算量-4"><a class="header" href="#計算量-4">計算量</a></h2>
+<h2 id="計算量-5"><a class="header" href="#計算量-5">計算量</a></h2>
 <p>前計算\(O(N^2)\)，クエリ\(O(1)\)</p>
 <pre><code class="language-cpp">struct Pascal{
     //tri[a][b] = aCb
@@ -581,7 +646,7 @@ template&lt;int MOD&gt; struct Fp {
 <h1 id="二項係数mod"><a class="header" href="#二項係数mod">二項係数(mod)</a></h1>
 <h2 id="概要-7"><a class="header" href="#概要-7">概要</a></h2>
 <p>二項係数\({}_a \mathrm{C}_b (0\leq a,b\leq N )\)を素数\(P\)で割った余りを求める．</p>
-<h2 id="計算量-5"><a class="header" href="#計算量-5">計算量</a></h2>
+<h2 id="計算量-6"><a class="header" href="#計算量-6">計算量</a></h2>
 <p>前計算\(O(N\log P)\)，クエリ\(O(1)\)</p>
 <pre><code class="language-cpp">template&lt;class T&gt; struct Combination{
     int N;
@@ -612,7 +677,7 @@ template&lt;int MOD&gt; struct Fp {
 <h1 id="ルーカスの定理による二項係数"><a class="header" href="#ルーカスの定理による二項係数">ルーカスの定理による二項係数</a></h1>
 <h2 id="概要-8"><a class="header" href="#概要-8">概要</a></h2>
 <p>ルーカスの定理によって二項係数を素数\(P\)で割った余りを計算する．</p>
-<h2 id="計算量-6"><a class="header" href="#計算量-6">計算量</a></h2>
+<h2 id="計算量-7"><a class="header" href="#計算量-7">計算量</a></h2>
 <p>前計算\(O(P^2)\)，二項係数計算に\(O(\log P) \)</p>
 <pre><code class="language-cpp">template&lt;int MOD&gt; struct Lucas{
     Pascal pas{MOD};
@@ -670,7 +735,7 @@ bool Bezout(long a,long b,long c,long &amp;alpha,long &amp;beta,long &amp;gamma,
 <h1 id="lcdgcd"><a class="header" href="#lcdgcd">LCD,GCD</a></h1>
 <h2 id="概要-10"><a class="header" href="#概要-10">概要</a></h2>
 <p>最大公約数(GCD)，最小公倍数(LCM)を求める</p>
-<h2 id="計算量-7"><a class="header" href="#計算量-7">計算量</a></h2>
+<h2 id="計算量-8"><a class="header" href="#計算量-8">計算量</a></h2>
 <pre><code class="language-cpp">
 long GCD(long a,long b){
     if(a&lt;b)return GCD(b,a);
@@ -747,7 +812,7 @@ bool CRT(const vector&lt;pair&lt;long,long&gt;&gt; &amp;X,long &amp;r,long &amp;
 <h1 id="baby-step-giant-step"><a class="header" href="#baby-step-giant-step">baby step giant step</a></h1>
 <h2 id="概要-12"><a class="header" href="#概要-12">概要</a></h2>
 <p>素数\(p\)と\(0\leq a,b&lt; p \)について，\(a^x = b \mod p\)となる\(x\)を求める．</p>
-<h2 id="計算量-8"><a class="header" href="#計算量-8">計算量</a></h2>
+<h2 id="計算量-9"><a class="header" href="#計算量-9">計算量</a></h2>
 <p>\(O(\sqrt{p} )\log \sqrt{p}\)</p>
 <pre><code class="language-cpp">long  extgcd(long a,long b,long &amp; x,long &amp; y){
     long d = a;
@@ -886,7 +951,7 @@ print(factor(N))
 <h1 id="gcdlcm"><a class="header" href="#gcdlcm">GCD,LCM</a></h1>
 <h2 id="概要-14"><a class="header" href="#概要-14">概要</a></h2>
 <p>最大公約数，最小公倍数を求めます．</p>
-<h2 id="計算量-9"><a class="header" href="#計算量-9">計算量</a></h2>
+<h2 id="計算量-10"><a class="header" href="#計算量-10">計算量</a></h2>
 <p>\(O(\log a)\)</p>
 <pre><code class="language-python">def GCD(a,b):
     if a%b==0:
