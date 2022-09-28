@@ -1,6 +1,6 @@
 # 順列列挙
 ## 概要
-`next_permutation`を使って要素が\\(0,1,2,3,...,N\\)からなる長さ\\(N\\)の順列を列挙します．
+`next_permutation`を使って要素が\\(0,1,2,3,...,N\\)からなる長さ\\(N\\)の順列を列挙する．
 
 ```cpp
 vector<vector<int>> permutations(int N){

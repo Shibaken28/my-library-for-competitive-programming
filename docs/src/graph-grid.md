@@ -7,7 +7,6 @@
 `calc()`関数内を適切に書き換えて使用してください．
 
 
-
 ```cpp
 struct GridGraph{
     int H,W;
