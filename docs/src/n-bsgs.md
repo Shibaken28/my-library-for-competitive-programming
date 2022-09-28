@@ -4,7 +4,7 @@
 素数\\(p\\)と\\(0\leq a,b< p \\)について，\\(a^x = b \mod p\\)となる\\(x\\)を求める．
 
 ## 計算量
-\\(O(\sqrt{p} )\log \sqrt{p}\\)
+\\(O(\sqrt{p} \log \sqrt{p})\\)
 
 ```cpp
 long  extgcd(long a,long b,long & x,long & y){

@@ -4,6 +4,9 @@
 - 保証しません．
 - issueを出してくださると直すかもしれません．
 
-## 方言
+## 言語
+CTF関係のプログラムのみpython，他は全てC++です．
+
+## メモ
 `git subtree push --prefix docs/book/ origin gh-pages`
 
