@@ -100,7 +100,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="info.html"><strong aria-hidden="true">1.</strong> 諸注意</a></li><li class="chapter-item expanded "><a href="graph-dijkstra.html"><strong aria-hidden="true">2.</strong> グラフ理論</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="graph-dijkstra.html"><strong aria-hidden="true">2.1.</strong> ダイクストラ法</a></li><li class="chapter-item expanded "><a href="graph-bellman.html"><strong aria-hidden="true">2.2.</strong> ベルマンフォード法</a></li><li class="chapter-item expanded "><a href="graph-floyd.html"><strong aria-hidden="true">2.3.</strong> ワーシャルフロイド法</a></li><li class="chapter-item expanded "><a href="graph-grid.html"><strong aria-hidden="true">2.4.</strong> 二次元マップをグラフに起こすやつ</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 列挙</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="enum-per.html"><strong aria-hidden="true">3.1.</strong> 順列列挙</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> 整数</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="n-pascal.html"><strong aria-hidden="true">4.1.</strong> パスカルの3角形</a></li><li class="chapter-item expanded "><a href="n-mint.html"><strong aria-hidden="true">4.2.</strong> modint構造体</a></li><li class="chapter-item expanded "><a href="n-com.html"><strong aria-hidden="true">4.3.</strong> 二項係数</a></li><li class="chapter-item expanded "><a href="n-lucas.html"><strong aria-hidden="true">4.4.</strong> ルーカスの定理による二項係数</a></li><li class="chapter-item expanded "><a href="n-bezout.html"><strong aria-hidden="true">4.5.</strong> 2元1次不定方程式</a></li><li class="chapter-item expanded "><a href="n-gcd.html"><strong aria-hidden="true">4.6.</strong> LCD,GCD</a></li><li class="chapter-item expanded "><a href="n-crt.html"><strong aria-hidden="true">4.7.</strong> 中国剰余定理</a></li><li class="chapter-item expanded "><a href="n-bsgs.html"><strong aria-hidden="true">4.8.</strong> baby step giant step</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> 幾何</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> 線形代数</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> 数列</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> 未分類</div></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="info.html"><strong aria-hidden="true">1.</strong> 諸注意</a></li><li class="chapter-item expanded "><a href="graph-dijkstra.html"><strong aria-hidden="true">2.</strong> グラフ理論</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="graph-dijkstra.html"><strong aria-hidden="true">2.1.</strong> ダイクストラ法</a></li><li class="chapter-item expanded "><a href="graph-bellman.html"><strong aria-hidden="true">2.2.</strong> ベルマンフォード法</a></li><li class="chapter-item expanded "><a href="graph-floyd.html"><strong aria-hidden="true">2.3.</strong> ワーシャルフロイド法</a></li><li class="chapter-item expanded "><a href="graph-grid.html"><strong aria-hidden="true">2.4.</strong> 二次元マップをグラフに起こすやつ</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 列挙</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="enum-per.html"><strong aria-hidden="true">3.1.</strong> 順列列挙</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> 整数</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="n-pascal.html"><strong aria-hidden="true">4.1.</strong> パスカルの三角形による二項係数</a></li><li class="chapter-item expanded "><a href="n-mint.html"><strong aria-hidden="true">4.2.</strong> modint構造体</a></li><li class="chapter-item expanded "><a href="n-mint2.html"><strong aria-hidden="true">4.3.</strong> 実行時に法が決まるmodint構造体</a></li><li class="chapter-item expanded "><a href="n-com.html"><strong aria-hidden="true">4.4.</strong> 二項係数(mod)</a></li><li class="chapter-item expanded "><a href="n-lucas.html"><strong aria-hidden="true">4.5.</strong> ルーカスの定理による二項係数</a></li><li class="chapter-item expanded "><a href="n-bezout.html"><strong aria-hidden="true">4.6.</strong> 2元1次不定方程式</a></li><li class="chapter-item expanded "><a href="n-gcd.html"><strong aria-hidden="true">4.7.</strong> LCD,GCD</a></li><li class="chapter-item expanded "><a href="n-crt.html"><strong aria-hidden="true">4.8.</strong> 中国剰余定理</a></li><li class="chapter-item expanded "><a href="n-bsgs.html"><strong aria-hidden="true">4.9.</strong> baby step giant step</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> 幾何</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> 線形代数</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> 数列</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> 未分類</div></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -417,16 +417,328 @@ vector&lt;vector&lt;long&gt;&gt; floydWarshall(vector&lt;vector&lt;long&gt;&gt; 
 }
 </code></pre>
 <h1 id="パスカルの3角形"><a class="header" href="#パスカルの3角形">パスカルの3角形</a></h1>
-<h1 id="modint構造体"><a class="header" href="#modint構造体">modint構造体</a></h1>
-<h1 id="二項係数"><a class="header" href="#二項係数">二項係数</a></h1>
-<h1 id="ルーカスの定理による二項係数"><a class="header" href="#ルーカスの定理による二項係数">ルーカスの定理による二項係数</a></h1>
-<h1 id="2元1次不定方程式"><a class="header" href="#2元1次不定方程式">2元1次不定方程式</a></h1>
-<h1 id="lcdgcd"><a class="header" href="#lcdgcd">LCD,GCD</a></h1>
-<h1 id="中国剰余定理"><a class="header" href="#中国剰余定理">中国剰余定理</a></h1>
-<h1 id="baby-step-giant-step"><a class="header" href="#baby-step-giant-step">baby step giant step</a></h1>
 <h2 id="概要-6"><a class="header" href="#概要-6">概要</a></h2>
-<p>素数\(p\)と\(0\leq a,b&lt; p \)について，\(a^x = b \mod p\)となる\(x\)を求める．</p>
+<p>パスカルの三角形によって二項係数\({}_a \mathrm{C}_b (0\leq a,b&lt;= N )\)を求める．</p>
 <h2 id="計算量-4"><a class="header" href="#計算量-4">計算量</a></h2>
+<p>前計算\(O(N^2)\)，クエリ\(O(1)\)</p>
+<pre><code class="language-cpp">struct Pascal{
+    //tri[a][b] = aCb
+    vector&lt;vector&lt;long&gt;&gt; tri;
+    int N;
+    Pascal(int N){
+        this-&gt;N = N;
+        init();
+    }
+    void init(){
+        tri.clear();
+        tri.push_back({1});
+        for(int i=1;i&lt;N;i++){
+            vector&lt;long&gt; add(0);
+            add.push_back(1);
+            for(int k=0;k&lt;i-1;k++){
+                add.push_back(tri.back()[k]+tri.back()[k+1]);
+            }
+            add.push_back(1);
+            tri.push_back(add);
+        }
+    }
+    long com(int a,int b){
+        if(a&lt;b)return 0;
+        return tri[a][b];
+    }
+};
+</code></pre>
+<h1 id="modint構造体"><a class="header" href="#modint構造体">modint構造体</a></h1>
+<h2 id="参考"><a class="header" href="#参考">参考</a></h2>
+<p><a href="https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod.cpp">https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod.cpp</a></p>
+<pre><code class="language-cpp">// modint: mod 計算を int を扱うように扱える構造体
+template&lt;int MOD&gt; struct Fp {
+    long long val;
+    constexpr Fp(long long v = 0) noexcept : val(v % MOD) {
+        if (val &lt; 0) val += MOD;
+    }
+    constexpr int getmod() { return MOD; }
+    constexpr Fp operator - () const noexcept {
+        return val ? MOD - val : 0;
+    }
+    constexpr Fp operator + (const Fp&amp; r) const noexcept { return Fp(*this) += r; }
+    constexpr Fp operator - (const Fp&amp; r) const noexcept { return Fp(*this) -= r; }
+    constexpr Fp operator * (const Fp&amp; r) const noexcept { return Fp(*this) *= r; }
+    constexpr Fp operator / (const Fp&amp; r) const noexcept { return Fp(*this) /= r; }
+    constexpr Fp&amp; operator += (const Fp&amp; r) noexcept {
+        val += r.val;
+        if (val &gt;= MOD) val -= MOD;
+        return *this;
+    }
+    constexpr Fp&amp; operator -= (const Fp&amp; r) noexcept {
+        val -= r.val;
+        if (val &lt; 0) val += MOD;
+        return *this;
+    }
+    constexpr Fp&amp; operator *= (const Fp&amp; r) noexcept {
+        val = val * r.val % MOD;
+        return *this;
+    }
+    constexpr Fp&amp; operator /= (const Fp&amp; r) noexcept {
+        long long a = r.val, b = MOD, u = 1, v = 0;
+        while (b) {
+            long long t = a / b;
+            a -= t * b; swap(a, b);
+            u -= t * v; swap(u, v);
+        }
+        val = val * u % MOD;
+        if (val &lt; 0) val += MOD;
+        return *this;
+    }
+    constexpr bool operator == (const Fp&amp; r) const noexcept {
+        return this-&gt;val == r.val;
+    }
+    constexpr bool operator != (const Fp&amp; r) const noexcept {
+        return this-&gt;val != r.val;
+    }
+    friend constexpr ostream&amp; operator &lt;&lt; (ostream &amp;os, const Fp&lt;MOD&gt;&amp; x) noexcept {
+        return os &lt;&lt; x.val;
+    }
+    friend constexpr Fp&lt;MOD&gt; modpow(const Fp&lt;MOD&gt; &amp;a, long long n) noexcept {
+        if (n == 0) return 1;
+        auto t = modpow(a, n / 2);
+        t = t * t;
+        if (n &amp; 1) t = t * a;
+        return t;
+    }
+};
+
+</code></pre>
+<h1 id="実行時に法が決まるmodint構造体"><a class="header" href="#実行時に法が決まるmodint構造体">実行時に法が決まるmodint構造体</a></h1>
+<h2 id="参考-1"><a class="header" href="#参考-1">参考</a></h2>
+<p><a href="https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod_runtime.cpp">https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod_runtime.cpp</a></p>
+<pre><code class="language-cpp">// modint: mod 計算を int を扱うように扱える構造体
+template&lt;int MOD&gt; struct Fp {
+    long long val;
+    constexpr Fp(long long v = 0) noexcept : val(v % MOD) {
+        if (val &lt; 0) val += MOD;
+    }
+    constexpr int getmod() { return MOD; }
+    constexpr Fp operator - () const noexcept {
+        return val ? MOD - val : 0;
+    }
+    constexpr Fp operator + (const Fp&amp; r) const noexcept { return Fp(*this) += r; }
+    constexpr Fp operator - (const Fp&amp; r) const noexcept { return Fp(*this) -= r; }
+    constexpr Fp operator * (const Fp&amp; r) const noexcept { return Fp(*this) *= r; }
+    constexpr Fp operator / (const Fp&amp; r) const noexcept { return Fp(*this) /= r; }
+    constexpr Fp&amp; operator += (const Fp&amp; r) noexcept {
+        val += r.val;
+        if (val &gt;= MOD) val -= MOD;
+        return *this;
+    }
+    constexpr Fp&amp; operator -= (const Fp&amp; r) noexcept {
+        val -= r.val;
+        if (val &lt; 0) val += MOD;
+        return *this;
+    }
+    constexpr Fp&amp; operator *= (const Fp&amp; r) noexcept {
+        val = val * r.val % MOD;
+        return *this;
+    }
+    constexpr Fp&amp; operator /= (const Fp&amp; r) noexcept {
+        long long a = r.val, b = MOD, u = 1, v = 0;
+        while (b) {
+            long long t = a / b;
+            a -= t * b; swap(a, b);
+            u -= t * v; swap(u, v);
+        }
+        val = val * u % MOD;
+        if (val &lt; 0) val += MOD;
+        return *this;
+    }
+    constexpr bool operator == (const Fp&amp; r) const noexcept {
+        return this-&gt;val == r.val;
+    }
+    constexpr bool operator != (const Fp&amp; r) const noexcept {
+        return this-&gt;val != r.val;
+    }
+    friend constexpr ostream&amp; operator &lt;&lt; (ostream &amp;os, const Fp&lt;MOD&gt;&amp; x) noexcept {
+        return os &lt;&lt; x.val;
+    }
+    friend constexpr Fp&lt;MOD&gt; modpow(const Fp&lt;MOD&gt; &amp;a, long long n) noexcept {
+        if (n == 0) return 1;
+        auto t = modpow(a, n / 2);
+        t = t * t;
+        if (n &amp; 1) t = t * a;
+        return t;
+    }
+};
+
+</code></pre>
+<h1 id="二項係数mod"><a class="header" href="#二項係数mod">二項係数(mod)</a></h1>
+<h2 id="概要-7"><a class="header" href="#概要-7">概要</a></h2>
+<p>二項係数\({}_a \mathrm{C}_b (0\leq a,b&lt;= N )\)を素数\(P\)で割った余りを求める．</p>
+<h2 id="計算量-5"><a class="header" href="#計算量-5">計算量</a></h2>
+<p>前計算\(O(N\log P)\)，クエリ\(O(1)\)</p>
+<pre><code class="language-cpp">template&lt;class T&gt; struct Combination{
+    int N;
+    vector&lt;T&gt; fac;//階乗
+    vector&lt;T&gt; finv;//階乗の逆元
+    Combination(int N){
+        this-&gt;N = N;
+        init();
+    }
+    void init(){
+        fac.resize(N);
+        finv.resize(N);
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        for(int i=2;i&lt;N;i++){
+            fac[i] = fac[i-1] * i;
+            finv[i] = finv[i-1] / i;
+        }
+    }
+    /*aCbの計算*/
+    T com(int a,int b){
+        if(a &lt; b)return 0;
+        return fac[a] * finv[b] * finv[a-b];
+    }
+};
+
+</code></pre>
+<h1 id="ルーカスの定理による二項係数"><a class="header" href="#ルーカスの定理による二項係数">ルーカスの定理による二項係数</a></h1>
+<h2 id="概要-8"><a class="header" href="#概要-8">概要</a></h2>
+<p>ルーカスの定理によって二項係数を素数\(P\)で割った余りを計算する．</p>
+<h2 id="計算量-6"><a class="header" href="#計算量-6">計算量</a></h2>
+<p>前計算\(O(P^2)\)，二項係数計算に\(O(\log P) \)</p>
+<pre><code class="language-cpp">template&lt;int MOD&gt; struct Lucas{
+    Pascal pas{MOD};
+    Lucas(){
+    }
+    Fp&lt;MOD&gt; com(long a,long b){
+        if(a&lt;b)return 0;
+        Fp&lt;MOD&gt; ret{1};
+        while(a&gt;0){
+            ret *=pas.com(a%MOD,b%MOD);
+            a/=MOD;
+            b/=MOD;
+        }
+        return ret;
+    }
+};
+
+</code></pre>
+<h1 id="2元1次不定方程式"><a class="header" href="#2元1次不定方程式">2元1次不定方程式</a></h1>
+<p>非負整数\(a,b\)に対して\(ax + by = 1\) を解く．一般解が求められる．</p>
+<pre><code class="language-cpp">// 返り値: a と b の最大公約数
+// ax + by = gcd(a, b) を満たす (x, y) が格納される
+long extGCD(long a, long b, long &amp;x, long &amp;y) {
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    }
+    long d = extGCD(b, a%b, y, x);
+    y -= a/b * x;
+    return d;
+}
+/*
+ax + by = c の一般解
+x = alpha t + beta
+y = gamma t + delta
+*/
+bool Bezout(long a,long b,long c,long &amp;alpha,long &amp;beta,long &amp;gamma,long &amp;delta){
+    long x=0,y=0;
+    long gcd=extGCD(a,b,x,y);
+    if(c%gcd!=0){
+        return false;
+    }
+    x *= c/gcd;
+    y *= c/gcd;
+    gamma = a/gcd;
+    delta = y;
+    alpha = -b/gcd;
+    beta = x;
+    return true;
+}
+
+</code></pre>
+<h1 id="lcdgcd"><a class="header" href="#lcdgcd">LCD,GCD</a></h1>
+<h2 id="概要-9"><a class="header" href="#概要-9">概要</a></h2>
+<p>最大公約数(GCD)，最小公倍数(LCM)を求める</p>
+<h2 id="計算量-7"><a class="header" href="#計算量-7">計算量</a></h2>
+<pre><code class="language-cpp">
+long GCD(long a,long b){
+    if(a&lt;b)return GCD(b,a);
+    if(b==0)return a;
+    return GCD(b,a%b);
+}
+
+long GCD(vector&lt;long&gt;&amp;A){
+    long gcd = A.front();
+    for(auto&amp;a:A)gcd = GCD(gcd,a);
+    return gcd;
+}
+
+long LCM(long a,long b){
+    return (a/GCD(a,b))*b;
+}
+
+
+long LCM(vector&lt;long&gt;&amp;A){
+    long lcm = 1;
+    for(auto&amp;a:A)lcm = LCM(lcm,a);
+    return lcm;
+}
+
+</code></pre>
+<h1 id="中国剰余定理"><a class="header" href="#中国剰余定理">中国剰余定理</a></h1>
+<h2 id="概要-10"><a class="header" href="#概要-10">概要</a></h2>
+<p>\(a\)で割った余りが\(b\)，\(c\)で割った余りが\(d\)を満たす数を求める．</p>
+<pre><code class="language-cpp">// 返り値: a と b の最大公約数
+// ax + by = gcd(a, b) を満たす (x, y) が格納される
+long extGCD(long a, long b, long &amp;x, long &amp;y) {
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    }
+    long d = extGCD(b, a%b, y, x);
+    y -= a/b * x;
+    return d;
+}
+
+long mod(long a,long m){
+    if(a&gt;=0)return a%m; 
+    return (m-(-a)%m)%m;
+}
+
+/*
+中国剰余定理
+*/
+bool CRT(long b1, long m1, long b2, long m2,long &amp;r,long &amp;m) {
+    long p, q;
+    long d = extGCD(m1, m2, p, q);
+    if ((b2 - b1) % d != 0) return false;
+    m = m1 * (m2/d); 
+    long tmp = (b2 - b1) / d * p % (m2/d);
+    r = mod(b1 + m1 * tmp, m);
+    return true;
+}
+
+bool CRT(const vector&lt;pair&lt;long,long&gt;&gt; &amp;X,long &amp;r,long &amp;m) {
+    int s = X.size();
+    r = X.front().first;
+    m = X.front().second;
+    bool ok = true;
+    for(int i=1;i&lt;s;i++){
+        ok = CRT(r,m,X[i].first,X[i].second,r,m);
+        if(!ok){
+            break;
+        }
+    }
+    return ok;
+}
+</code></pre>
+<h1 id="baby-step-giant-step"><a class="header" href="#baby-step-giant-step">baby step giant step</a></h1>
+<h2 id="概要-11"><a class="header" href="#概要-11">概要</a></h2>
+<p>素数\(p\)と\(0\leq a,b&lt; p \)について，\(a^x = b \mod p\)となる\(x\)を求める．</p>
+<h2 id="計算量-8"><a class="header" href="#計算量-8">計算量</a></h2>
 <p>\(O(\sqrt{p} )\)</p>
 <pre><code class="language-cpp">long  extgcd(long a,long b,long &amp; x,long &amp; y){
     long d = a;

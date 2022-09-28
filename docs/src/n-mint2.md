@@ -1,6 +1,6 @@
-# modint構造体
+# 実行時に法が決まるmodint構造体
 ## 参考
-[https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod.cpp](https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod.cpp)
+[https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod_runtime.cpp](https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod_runtime.cpp)
 
 ```cpp
 // modint: mod 計算を int を扱うように扱える構造体

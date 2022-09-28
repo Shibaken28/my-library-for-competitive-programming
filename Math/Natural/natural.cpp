@@ -52,8 +52,21 @@ long GCD(long a,long b){
     return GCD(b,a%b);
 }
 
+long GCD(vector<long>&A){
+    long gcd = A.front();
+    for(auto&a:A)gcd = GCD(gcd,a);
+    return gcd;
+}
+
 long LCM(long a,long b){
     return (a/GCD(a,b))*b;
+}
+
+
+long LCM(vector<long>&A){
+    long lcm = 1;
+    for(auto&a:A)lcm = LCM(lcm,a);
+    return lcm;
 }
 
 /*
@@ -109,13 +122,6 @@ bool CRT(const vector<pair<long,long>> &X,long &r,long &m) {
 }
 
 int main(){
-    vector<pair<long,long>> X(3);
-    for(auto&[a,m]:X)cin>>a>>m;
-    long a,m;
-    if(CRT(X,a,m)){
-        if(a==0)cout<<m<<endl;
-        else cout<<a<<endl;
-    }else{
-        cout<<-1<<endl;
-    }
+    vector<long> A={20,10,12};
+    cout<<GCD(A)<<" "<<LCM(A)<<endl;
 }

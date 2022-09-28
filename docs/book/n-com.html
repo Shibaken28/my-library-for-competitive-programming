@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>二項係数 - shiba&#x27;s Library</title>
+        <title>二項係数(mod) - shiba&#x27;s Library</title>
         
         
 
@@ -98,7 +98,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="info.html"><strong aria-hidden="true">1.</strong> 諸注意</a></li><li class="chapter-item expanded "><a href="graph-dijkstra.html"><strong aria-hidden="true">2.</strong> グラフ理論</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="graph-dijkstra.html"><strong aria-hidden="true">2.1.</strong> ダイクストラ法</a></li><li class="chapter-item expanded "><a href="graph-bellman.html"><strong aria-hidden="true">2.2.</strong> ベルマンフォード法</a></li><li class="chapter-item expanded "><a href="graph-floyd.html"><strong aria-hidden="true">2.3.</strong> ワーシャルフロイド法</a></li><li class="chapter-item expanded "><a href="graph-grid.html"><strong aria-hidden="true">2.4.</strong> 二次元マップをグラフに起こすやつ</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 列挙</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="enum-per.html"><strong aria-hidden="true">3.1.</strong> 順列列挙</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> 整数</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="n-pascal.html"><strong aria-hidden="true">4.1.</strong> パスカルの3角形</a></li><li class="chapter-item expanded "><a href="n-mint.html"><strong aria-hidden="true">4.2.</strong> modint構造体</a></li><li class="chapter-item expanded "><a href="n-com.html" class="active"><strong aria-hidden="true">4.3.</strong> 二項係数</a></li><li class="chapter-item expanded "><a href="n-lucas.html"><strong aria-hidden="true">4.4.</strong> ルーカスの定理による二項係数</a></li><li class="chapter-item expanded "><a href="n-bezout.html"><strong aria-hidden="true">4.5.</strong> 2元1次不定方程式</a></li><li class="chapter-item expanded "><a href="n-gcd.html"><strong aria-hidden="true">4.6.</strong> LCD,GCD</a></li><li class="chapter-item expanded "><a href="n-crt.html"><strong aria-hidden="true">4.7.</strong> 中国剰余定理</a></li><li class="chapter-item expanded "><a href="n-bsgs.html"><strong aria-hidden="true">4.8.</strong> baby step giant step</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> 幾何</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> 線形代数</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> 数列</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> 未分類</div></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="info.html"><strong aria-hidden="true">1.</strong> 諸注意</a></li><li class="chapter-item expanded "><a href="graph-dijkstra.html"><strong aria-hidden="true">2.</strong> グラフ理論</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="graph-dijkstra.html"><strong aria-hidden="true">2.1.</strong> ダイクストラ法</a></li><li class="chapter-item expanded "><a href="graph-bellman.html"><strong aria-hidden="true">2.2.</strong> ベルマンフォード法</a></li><li class="chapter-item expanded "><a href="graph-floyd.html"><strong aria-hidden="true">2.3.</strong> ワーシャルフロイド法</a></li><li class="chapter-item expanded "><a href="graph-grid.html"><strong aria-hidden="true">2.4.</strong> 二次元マップをグラフに起こすやつ</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 列挙</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="enum-per.html"><strong aria-hidden="true">3.1.</strong> 順列列挙</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> 整数</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="n-pascal.html"><strong aria-hidden="true">4.1.</strong> パスカルの三角形による二項係数</a></li><li class="chapter-item expanded "><a href="n-mint.html"><strong aria-hidden="true">4.2.</strong> modint構造体</a></li><li class="chapter-item expanded "><a href="n-mint2.html"><strong aria-hidden="true">4.3.</strong> 実行時に法が決まるmodint構造体</a></li><li class="chapter-item expanded "><a href="n-com.html" class="active"><strong aria-hidden="true">4.4.</strong> 二項係数(mod)</a></li><li class="chapter-item expanded "><a href="n-lucas.html"><strong aria-hidden="true">4.5.</strong> ルーカスの定理による二項係数</a></li><li class="chapter-item expanded "><a href="n-bezout.html"><strong aria-hidden="true">4.6.</strong> 2元1次不定方程式</a></li><li class="chapter-item expanded "><a href="n-gcd.html"><strong aria-hidden="true">4.7.</strong> LCD,GCD</a></li><li class="chapter-item expanded "><a href="n-crt.html"><strong aria-hidden="true">4.8.</strong> 中国剰余定理</a></li><li class="chapter-item expanded "><a href="n-bsgs.html"><strong aria-hidden="true">4.9.</strong> baby step giant step</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> 幾何</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> 線形代数</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> 数列</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> 未分類</div></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -166,14 +166,44 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="二項係数"><a class="header" href="#二項係数">二項係数</a></h1>
+                        <h1 id="二項係数mod"><a class="header" href="#二項係数mod">二項係数(mod)</a></h1>
+<h2 id="概要"><a class="header" href="#概要">概要</a></h2>
+<p>二項係数\({}_a \mathrm{C}_b (0\leq a,b&lt;= N )\)を素数\(P\)で割った余りを求める．</p>
+<h2 id="計算量"><a class="header" href="#計算量">計算量</a></h2>
+<p>前計算\(O(N\log P)\)，クエリ\(O(1)\)</p>
+<pre><code class="language-cpp">template&lt;class T&gt; struct Combination{
+    int N;
+    vector&lt;T&gt; fac;//階乗
+    vector&lt;T&gt; finv;//階乗の逆元
+    Combination(int N){
+        this-&gt;N = N;
+        init();
+    }
+    void init(){
+        fac.resize(N);
+        finv.resize(N);
+        fac[0] = fac[1] = 1;
+        finv[0] = finv[1] = 1;
+        for(int i=2;i&lt;N;i++){
+            fac[i] = fac[i-1] * i;
+            finv[i] = finv[i-1] / i;
+        }
+    }
+    /*aCbの計算*/
+    T com(int a,int b){
+        if(a &lt; b)return 0;
+        return fac[a] * finv[b] * finv[a-b];
+    }
+};
+
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="n-mint.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="n-mint2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
@@ -191,7 +221,7 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="n-mint.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="n-mint2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 

@@ -12,9 +12,10 @@
   - [順列列挙](./enum-per.md)
 
 - [整数]()
-  - [パスカルの3角形](./n-pascal.md)
+  - [パスカルの三角形による二項係数](./n-pascal.md)
   - [modint構造体](./n-mint.md)
-  - [二項係数](./n-com.md)
+  - [実行時に法が決まるmodint構造体](./n-mint2.md)
+  - [二項係数(mod)](./n-com.md)
   - [ルーカスの定理による二項係数](./n-lucas.md)
   - [2元1次不定方程式](./n-bezout.md)
   - [LCD,GCD](./n-gcd.md)
