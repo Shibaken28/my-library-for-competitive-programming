@@ -34,8 +34,8 @@
 - [幾何](./geo.md)
   - [線分の交差判定](./g-lineinter.md)
 
-
 - [数列](./seq.md)
+- [写像12相](./12.md)
 
 - [未分類](./unc.md)
   - [imos法](./u-imos.md)
