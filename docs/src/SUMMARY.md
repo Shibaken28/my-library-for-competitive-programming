@@ -9,7 +9,7 @@
   - [二次元マップをグラフに起こすやつ](./graph-grid.md)
 
 - [列挙](./enum.md)
-  - [順列列挙](./enum-per.md)
+  - [順列組み合わせ列挙](./enum-per.md)
 
 - [整数](./natural.md)
   - [素数判定](./n-prime.md)
