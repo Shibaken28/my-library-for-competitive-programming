@@ -41,3 +41,13 @@
   - [imos法](./u-imos.md)
   - [2次元imos法](./u-imos.md)
   - [要素を2分探索](./u-bs.md)
+
+- [CTF(暗号)関連](./crypto.md)
+  - [基数変換](./c-base.md)
+  - [long,bytes変換](./c-lb.md)
+  - [rho法素因数分解](./c-rho.md)
+  - [RSAテンプレ](./c-rsa.md)
+  - [baby step giant step](./c-bsgs.md)
+  - [中国剰余定理](./c-crt.md)
+  - [GCD,LCM](./c-gcd.md)
+  - [累乗根](./c-iroot.md)
