@@ -39,7 +39,7 @@
 
 - [未分類](./unc.md)
   - [imos法](./u-imos.md)
-  - [2次元imos法](./u-imos.md)
+  - [2次元imos法](./u-imos2d.md)
   - [要素を2分探索](./u-bs.md)
 
 - [CTF(暗号)関連](./crypto.md)
