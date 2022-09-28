@@ -405,7 +405,7 @@ vector&lt;vector&lt;long&gt;&gt; floydWarshall(vector&lt;vector&lt;long&gt;&gt; 
 </code></pre>
 <h1 id="順列列挙"><a class="header" href="#順列列挙">順列列挙</a></h1>
 <h2 id="概要-5"><a class="header" href="#概要-5">概要</a></h2>
-<p><code>next_permutation</code>を使って要素が\(0,1,2,3,...,N\)からなる長さ\(N\)の順列を列挙します．</p>
+<p><code>next_permutation</code>を使って要素が\(0,1,2,3,...,N\)からなる長さ\(N\)の順列を列挙する．</p>
 <pre><code class="language-cpp">vector&lt;vector&lt;int&gt;&gt; permutations(int N){
     vector&lt;int&gt; array(N);
     vector&lt;vector&lt;int&gt;&gt; A(0);
@@ -424,6 +424,82 @@ vector&lt;vector&lt;long&gt;&gt; floydWarshall(vector&lt;vector&lt;long&gt;&gt; 
 <h1 id="lcdgcd"><a class="header" href="#lcdgcd">LCD,GCD</a></h1>
 <h1 id="中国剰余定理"><a class="header" href="#中国剰余定理">中国剰余定理</a></h1>
 <h1 id="baby-step-giant-step"><a class="header" href="#baby-step-giant-step">baby step giant step</a></h1>
+<h2 id="概要-6"><a class="header" href="#概要-6">概要</a></h2>
+<p>素数\(p\)と\(0\leq a,b&lt; p \)について，\(a^x = b \mod p\)となる\(x\)を求める．</p>
+<h2 id="計算量-4"><a class="header" href="#計算量-4">計算量</a></h2>
+<p>\(O(\sqrt{p} )\)</p>
+<pre><code class="language-cpp">long  extgcd(long a,long b,long &amp; x,long &amp; y){
+    long d = a;
+    if(b != 0) {
+        d = extgcd(b,a%b,y,x);
+        y -= (a/b) * x;
+    }else{
+        x = 1; y = 0;
+    }
+    return d;
+}
+
+long mod_inverse(long a,long m){
+    long x,y;
+    extgcd(a,m,x,y);
+    return (m + x % m) % m;
+}
+
+int modPow(long a, long n, long p) {
+  if (n == 0) return 1; // 0乗にも対応する場合
+  if (n == 1) return a % p;
+  if (n % 2 == 1) return (a * modPow(a, n - 1, p)) % p;
+  long t = modPow(a, n / 2, p);
+  return (t * t) % p;
+}
+
+long iroot(long y,int n){
+    //x^n &lt;= yとなる最大のn
+    long ok = 0;
+    long ng = y+1;
+    while(abs(ok-ng)&gt;1){
+        long mid = (ok+ng)/2;
+        long x = 1;
+        bool inf = false;
+        for(int i=0;i&lt;n;i++){
+            if(((long)1e18)/x &lt; mid)inf = true;
+            x *= mid;
+        }
+        if(inf||x&gt;y){
+            ng = mid;
+        }else{
+            ok = mid;
+        }
+    }
+    return ok;
+}
+
+long BSGS(long a,long b,long p){
+    /* a^x = b mod p となるようなxを求める */
+    long x = -1;
+    long m = iroot(p,2)+1;
+    map&lt;long,long&gt; mp;
+    long ax = 1;
+    for(long i=0;i&lt;=m;i++){
+        mp[ax] = i;
+        ax = (ax*a) % p;
+    }
+    /*
+    a^(im+j) = b
+    a^j = b(a^-m)^i
+    */
+    long am = modPow(mod_inverse(a,p),m,p);
+    for(long i=0;i&lt;=m;i++){
+        long d = (modPow(am,i,p)*b) % p;
+        if(mp.count(d)){
+            if(i==0&amp;&amp;mp[d]==0)continue;
+            x = i*m + mp[d];
+            break;
+        }
+    }
+    return x;
+}
+</code></pre>
 
                     </main>
 
@@ -446,21 +522,6 @@ vector&lt;vector&lt;long&gt;&gt; floydWarshall(vector&lt;vector&lt;long&gt;&gt; 
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:5500/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         
