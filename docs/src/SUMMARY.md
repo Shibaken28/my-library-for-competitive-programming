@@ -12,6 +12,11 @@
   - [順列列挙](./enum-per.md)
 
 - [整数](./natural.md)
+  - [素数判定](./n-prime.md)
+  - [素数篩](./n-sieve.md)
+  - [約数列挙](./n-div.md)
+  - [素因数分解](./n-fac.md)
+  - [累乗根](./n-iroot.md)
   - [パスカルの三角形による二項係数](./n-pascal.md)
   - [modint構造体](./n-mint.md)
   - [実行時に法が決まるmodint構造体](./n-mint2.md)
@@ -21,10 +26,18 @@
   - [LCD,GCD](./n-gcd.md)
   - [中国剰余定理](./n-crt.md)
   - [baby step giant step](./n-bsgs.md)
-- [幾何](./geo.md)
+
 - [線形代数](./linear.md)
+  - [3次元ベクトル構造体](./l-vec3.md)
+  - [行列](./l-matrix.md)
+
+- [幾何](./geo.md)
+  - [線分の交差判定](./g-lineinter.md)
+
+
 - [数列](./seq.md)
 
-
 - [未分類](./unc.md)
-
+  - [imos法](./u-imos.md)
+  - [2次元imos法](./u-imos.md)
+  - [要素を2分探索](./u-bs.md)
