@@ -1,6 +1,6 @@
 # Summary
 
-- [諸注意](./info.md)
+- [このライブラリについて](./info.md)
 
 - [グラフ理論](./graph-dijkstra.md)
   - [ダイクストラ法](./graph-dijkstra.md)
