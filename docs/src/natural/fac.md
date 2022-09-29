@@ -4,7 +4,7 @@
 ## 計算量
 \\(O(\sqrt{N})\\)
 
-
+## ソースコード
 ```cpp
 //素因数分解
 vector<long> factor(long x){

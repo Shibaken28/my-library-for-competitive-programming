@@ -1,7 +1,7 @@
 # 3次元ベクトル構造体
 ## 概要
 3次元ベクトルの加算減算，外積が計算できる
-
+## ソースコード
 ```cpp
 template<class T> struct Vector3D{
     T x{0};

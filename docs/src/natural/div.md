@@ -4,7 +4,7 @@
 ## 計算量
 \\(O(\sqrt{N})\\)
 
-
+## ソースコード
 ```cpp
 //約数列挙
 vector<long> divisor(long x){

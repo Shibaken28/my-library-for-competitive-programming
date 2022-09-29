@@ -5,7 +5,7 @@
 
 ## 計算量
 \\(O(\sqrt{p} \log \sqrt{p})\\)
-
+## ソースコード
 ```cpp
 long  extgcd(long a,long b,long & x,long & y){
     long d = a;

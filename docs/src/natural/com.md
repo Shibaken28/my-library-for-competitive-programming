@@ -5,7 +5,7 @@
 
 ## 計算量
 前計算\\(O(N\log P)\\)，クエリ\\(O(1)\\)
-
+## ソースコード
 ```cpp
 template<class T> struct Combination{
     int N;

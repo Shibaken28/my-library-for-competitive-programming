@@ -1,7 +1,7 @@
 # long,bytes変換
 ## 概要
 `Crypto.Util.number`の`bytes_to_long,long_to_bytes`と同じ挙動をする(はず)．
-
+## ソースコード
 ```python
 def bytesToLong(b : bytes):
     res = 0

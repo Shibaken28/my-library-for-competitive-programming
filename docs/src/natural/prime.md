@@ -3,7 +3,7 @@
 素数かどうかを判定する．
 ## 計算量
 \\(O(\sqrt{N})\\)
-
+## ソースコード
 ```cpp
 bool isPrime(long N){
     if(N<=1)return false;

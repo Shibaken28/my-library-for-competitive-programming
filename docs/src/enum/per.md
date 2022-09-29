@@ -9,7 +9,7 @@
 
 ## 計算量
 よくわからん
-
+## ソースコード
 ```cpp
 vector<vector<int>> permutations(int N){
     vector<int> array(N);

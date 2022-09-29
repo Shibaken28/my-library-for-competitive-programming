@@ -3,7 +3,7 @@
 最大公約数(GCD)，最小公倍数(LCM)を求める
 ## 計算量
 
-
+## ソースコード
 ```cpp
 
 long GCD(long a,long b){

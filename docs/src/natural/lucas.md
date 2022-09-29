@@ -3,7 +3,7 @@
 ルーカスの定理によって二項係数を素数\\(P\\)で割った余りを計算する．
 ## 計算量
 前計算\\(O(P^2)\\)，二項係数計算に\\(O(\log P) \\)
-
+## ソースコード
 ```cpp
 template<int MOD> struct Lucas{
     Pascal pas{MOD};

@@ -1,7 +1,7 @@
 # 線分の交差判定
 ## 概要
 線分同士が共通する点を持つかを判定．
-
+## ソースコード
 ```cpp
 
 inline bool rangeInRange(long l0,long r0,long l1,long r1){

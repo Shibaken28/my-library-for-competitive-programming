@@ -1,7 +1,7 @@
 # modint構造体
 ## 参考
 [https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod.cpp](https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod.cpp)
-
+## ソースコード
 ```cpp
 // modint: mod 計算を int を扱うように扱える構造体
 template<int MOD> struct Fp {

@@ -1,7 +1,7 @@
 # 2次元imos法
 
 ## 概要
-
+## ソースコード
 ```cpp
 template<class T> struct Imos2d{
     vector<vector<T>> A;

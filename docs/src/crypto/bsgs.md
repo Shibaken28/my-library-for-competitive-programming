@@ -6,7 +6,7 @@
 ## 計算量
 \\(O(\sqrt{p}) \\)
 
-
+## ソースコード
 ```python
 def iroot(N,a):
     # x^a <= Nとなる最大の整数x
@@ -41,3 +41,21 @@ def BSGS(a:int,b:int,p:int):
             break
     return x
 ```
+
+## 実行例
+```python
+x = BSGS(10,3,97)
+print(x)
+
+x = BSGS(12345,1,998244353)
+print(x)
+
+x = BSGS(2,3,7)
+print(x) #存在しない
+```
+```python
+2
+142606336
+-1
+```
+存在しないと\\(-1\\)が返される．
