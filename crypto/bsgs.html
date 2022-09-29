@@ -171,6 +171,7 @@
 <p>素数\(p\)と\(0\leq a,b&lt; p \)について，\(a^x = b \mod p\)となる\(x\)を求める．</p>
 <h2 id="計算量"><a class="header" href="#計算量">計算量</a></h2>
 <p>\(O(\sqrt{p}) \)</p>
+<h2 id="ソースコード"><a class="header" href="#ソースコード">ソースコード</a></h2>
 <pre><code class="language-python">def iroot(N,a):
     # x^a &lt;= Nとなる最大の整数x
     ok = 0
@@ -204,6 +205,21 @@ def BSGS(a:int,b:int,p:int):
             break
     return x
 </code></pre>
+<h2 id="実行例"><a class="header" href="#実行例">実行例</a></h2>
+<pre><code class="language-python">x = BSGS(10,3,97)
+print(x)
+
+x = BSGS(12345,1,998244353)
+print(x)
+
+x = BSGS(2,3,7)
+print(x) #存在しない
+</code></pre>
+<pre><code class="language-python">2
+142606336
+-1
+</code></pre>
+<p>存在しないと\(-1\)が返される．</p>
 
                     </main>
 

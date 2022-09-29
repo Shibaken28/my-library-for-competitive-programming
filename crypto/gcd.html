@@ -171,6 +171,7 @@
 <p>最大公約数，最小公倍数を求めます．</p>
 <h2 id="計算量"><a class="header" href="#計算量">計算量</a></h2>
 <p>\(O(\log a)\)</p>
+<h2 id="ソースコード"><a class="header" href="#ソースコード">ソースコード</a></h2>
 <pre><code class="language-python">def GCD(a,b):
     if a%b==0:
         return b
@@ -179,6 +180,16 @@
 def LCM(a,b):
     return a//GCD(a,b)*b
 </code></pre>
+<h2 id="実行例"><a class="header" href="#実行例">実行例</a></h2>
+<pre><code class="language-python">print(GCD(18,24))
+print(LCM(18,24))
+print(GCD(29879889137498173123,13918739184798747613272))
+</code></pre>
+<pre><code class="language-python">6
+72
+7
+</code></pre>
+<p>計算量が\(O(\log a)\)と小さいため大きな数でも簡単に求められる．</p>
 
                     </main>
 
