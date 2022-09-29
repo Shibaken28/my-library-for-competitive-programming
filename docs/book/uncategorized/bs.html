@@ -167,6 +167,141 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="要素を2分探索"><a class="header" href="#要素を2分探索">要素を2分探索</a></h1>
+<h2 id="概要"><a class="header" href="#概要">概要</a></h2>
+<p>C++には<code>lower_bound</code>や<code>upper_bound</code>，<code>binary_search</code>が用意されているが，例外処理が面倒なので関数したもの．
+次の関数を作成した．</p>
+<ul>
+<li>その数が存在するかの<code>isExist</code></li>
+<li>\(x\)以上の最小の数を探す<code>lowerElement</code></li>
+<li>\(x\)より大きい最小の数を探す<code>upperlement</code></li>
+<li>\(x\)以下の最大の数を探す<code>underElement</code></li>
+<li>\(x\)未満の最大の数を探す<code>lessElement</code></li>
+<li>\(x\)の個数を数える<code>countElement</code></li>
+<li>\(l\)以上\(r\)以下の個数を数える<code>countElementInRange</code></li>
+</ul>
+<h2 id="注意"><a class="header" href="#注意">注意</a></h2>
+<p><code>vector</code>はソート済みである必要がある．</p>
+<h2 id="ソースコード"><a class="header" href="#ソースコード">ソースコード</a></h2>
+<pre><code class="language-cpp">/*
+Aにxが存在するか
+O(log N)
+*/
+template&lt;class T&gt; bool isExist(vector&lt;T&gt; &amp;A,T x){
+    return binary_search(A.begin(),A.end(),x);
+}
+template&lt;class T&gt; bool isExist(set&lt;T&gt; &amp;A,T x){
+    auto it = A.lower_bound(x);
+    if(it==A.end()){
+        return false;
+    }
+    return *it == x;
+}
+
+/*
+Aに存在するx以上の数
+最も小さいindexとその値find
+O(log N)
+*/
+template&lt;class T&gt; bool lowerElement(vector&lt;T&gt; &amp;A,T x,T &amp;find,int &amp;index){
+    index = lower_bound(A.begin(),A.end(),x) - A.begin();
+    if(index == (int)A.size())return false;
+    find = A[index];
+    return true;
+}
+template&lt;class T&gt; bool lowerElement(set&lt;T&gt; &amp;A,T x,T &amp;find){
+    auto it = A.lower_bound(x);
+    if(it==A.end())return false;
+    find = *it;
+    return true;
+}
+
+
+
+/*
+Aに存在するxより大きい数
+最も小さいindexとその値find
+O(log N)
+*/
+template&lt;class T&gt; bool upperElement(vector&lt;T&gt; &amp;A,T x,T &amp;find,int &amp;index){
+    index = upper_bound(A.begin(),A.end(),x) - A.begin();
+    if(index == (int)A.size())return false;
+    find = A[index];
+    return true;
+}
+template&lt;class T&gt; bool upperElement(set&lt;T&gt; &amp;A,T x,T &amp;find){
+    auto it = A.upper_bound(x);
+    if(it == A.end())return false;
+    find = *it;
+    return true;
+}               
+
+
+
+
+/*
+Aに存在するx以下
+最も大きいindexとその値find
+O(log N)
+*/
+template&lt;class T&gt; bool underElement(vector&lt;T&gt; &amp;A,T x,T &amp;find,int &amp;index){
+    index = upper_bound(A.begin(),A.end(),x) - A.begin();
+    index--;
+    if(index &gt;= (int)A.size())return false;
+    find = A[index];
+    return true;
+}
+template&lt;class T&gt; bool underElement(set&lt;T&gt; &amp;A,T x,T &amp;find){
+    auto it = A.upper_bound(x);
+    if(it == A.begin())return false;
+    it--;
+    find = *it;
+    return true;
+}
+
+/*
+Aに存在するxより小さい数
+最も大きいindexとその値find
+O(log N)
+*/
+template&lt;class T&gt; bool lessElement(vector&lt;T&gt; &amp;A,T x,T &amp;find,int &amp;index){
+    index = lower_bound(A.begin(),A.end(),x) - A.begin();
+    index--;
+    if(index &lt; 0)return false;
+    find = A[index];
+    return true;
+}
+template&lt;class T&gt; bool lessElement(set&lt;T&gt; &amp;A,T x,T &amp;find){
+    auto it = A.lower_bound(x);
+    if(it == A.begin())return false;
+    it--;
+    find = *it;
+    return true;
+}
+
+/*
+Aに含まれるxの個数をO(log N)で求める
+*/
+template&lt;class T&gt; int countElement(vector&lt;T&gt; &amp;A,T x){
+    T f1,f2;
+    int i1,i2;
+    lowerElement(A,x,f1,i1);
+    underElement(A,x,f2,i2);
+    return isExist(A,x)?i2-i1+1:0;
+}
+
+/*
+Aに含まれるl以上r以下の個数をO(log N)で求める
+*/
+template&lt;class T&gt; int countElementInRange(vector&lt;T&gt; &amp;A,T l,T r){
+    T f1,f2;
+    int i1,i2;
+    lowerElement(A,l,f1,i1);
+    underElement(A,r,f2,i2);
+    int c = i2-i1+1;
+    return c&gt;0?c:0;
+}
+
+</code></pre>
 
                     </main>
 
