@@ -5,7 +5,7 @@
 - 第\\(n\\)項はいくつか
 - 第\\(l\\)項目から第\\(r\\)項目までの和
 - \\(b\\)は何項目であるか
-
+## ソースコード
 ```cpp
 //初項s公差d第n項までの和
 long arithSum(long a,long d,long n){
@@ -37,6 +37,7 @@ long arithWhere(long a,long d,long b){
 }
 
 ```
+## 実行例
 ```cpp
 int main(void){
     long a,d;
