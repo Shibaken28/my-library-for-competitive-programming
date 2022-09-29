@@ -35,6 +35,7 @@
   - [線分の交差判定](./geometory/lineinter.md)
 
 - [数列](./seqence/index.md)
+  - [等差数列](./seqence/arith.md)
 - [写像12相](./foldway12/index.md)
 
 - [未分類](./uncategorized/index.md)
