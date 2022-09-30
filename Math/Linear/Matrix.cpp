@@ -131,6 +131,78 @@ template<class T> std::istream &operator>>(std::istream &in,vector<T>&A){
 
 
 
+
+
+// matrix
+template<class T> struct Matrix {
+    vector<vector<T> > val;
+    Matrix(int n = 1, int m = 1, T v = 0) : val(n, vector<T>(m, v)) {}
+    void init(int n, int m, T v = 0) {val.assign(n, vector<T>(m, v));}
+    void resize(int n, int m) {
+        val.resize(n);
+        for (int i = 0; i < n; ++i) val[i].resize(m);
+    }
+    Matrix<T>& operator = (const Matrix<T> &A) {
+        val = A.val;
+        return *this;
+    }
+    size_t size() const {return val.size();}
+    vector<T>& operator [] (int i) {return val[i];}
+    const vector<T>& operator [] (int i) const {return val[i];}
+    friend ostream& operator << (ostream& s, const Matrix<T>& M) {
+        s << endl;
+        for (int i = 0; i < (int)M.size(); ++i) s << M[i] << endl;
+        return s;
+    }
+};
+
+template<class T> Matrix<T> operator * (const Matrix<T> &A, const Matrix<T> &B) {
+    Matrix<T> R(A.size(), B[0].size());
+    for (int i = 0; i < A.size(); ++i)
+        for (int j = 0; j < B[0].size(); ++j)
+            for (int k = 0; k < B.size(); ++k)
+                R[i][j] += A[i][k] * B[k][j];
+    return R;
+}
+
+template<class T> Matrix<T> pow(const Matrix<T> &A, long long n) {
+    Matrix<T> R(A.size(), A.size());
+    auto B = A;
+    for (int i = 0; i < A.size(); ++i) R[i][i] = 1;
+    while (n > 0) {
+        if (n & 1) R = R * B;
+        B = B * B;
+        n >>= 1;
+    }
+    return R;
+}
+
+template<class T> vector<T> operator * (const Matrix<T> &A, const vector<T> &B) {
+    vector<T> v(A.size());
+    for (int i = 0; i < A.size(); ++i)
+        for (int k = 0; k < B.size(); ++k)
+            v[i] += A[i][k] * B[k];
+    return v;
+}
+
+template<class T> Matrix<T> operator + (const Matrix<T> &A, const Matrix<T> &B) {
+    Matrix<T> R(A.size(), A[0].size());
+    for (int i = 0; i < A.size(); ++i)
+        for (int j = 0; j < A[0].size(); ++j)
+            R[i][j] = A[i][j] + B[i][j];
+    return R;
+}
+
+template<class T> Matrix<T> operator - (const Matrix<T> &A, const Matrix<T> &B) {
+    Matrix<T> R(A.size(), A[0].size());
+    for (int i = 0; i < A.size(); ++i)
+        for (int j = 0; j < A[0].size(); ++j)
+            R[i][j] = A[i][j] - B[i][j];
+    return R;
+}
+
+
+// modint
 template<int MOD> struct Fp {
     long long val;
     constexpr Fp(long long v = 0) noexcept : val(v % MOD) {
@@ -187,288 +259,19 @@ template<int MOD> struct Fp {
     }
 };
 
-
-
-namespace MatrixLib {
-    class print_format_error: public std::exception {
-        virtual const char* what() const noexcept { return "Error: print() method cannot print these values because of unsupported!"; }
-    };
-    class matrix_product_error: public std::exception {
-        virtual const char* what() const noexcept { return "Error: Impossible to calculate matrix product!"; }
-    };
-    class determinant_error: public std::exception {
-        virtual const char* what() const noexcept { return "Error: Impossible to calculate determinant!"; }
-    };
-    class inversion_error: public std::exception {
-        virtual const char* what() const noexcept { return "Error: Impossible to calculate inversion!"; }
-    };
-
-
-    /*** 二次元行列のライブラリMatrix ***/
-    template <typename T>
-    class Matrix {
-        private:
-            vector<vector<T>> A;
-
-            T __cofactor(const vector<vector<T>>& coA) const {
-                /* 各余因子の計算を再帰的にする */
-                if (coA.size() == 1) return coA[0][0];
-                if (coA.size() == 2) {
-                    return coA[0][0]*coA[1][1]-coA[0][1]*coA[1][0];
-                }
-
-                T res = 0;
-                for (int col2=0; col2<coA.size(); col2++) {
-                    vector<vector<T>> cocoA(coA.size()-1);
-                    for (int row=1; row<coA.size(); row++) {
-                        for (int col=0; col<coA.size(); col++) {
-                            if (col2==col) continue;
-                            cocoA[row-1].emplace_back(coA[row][col]);
-                        }
-                    }
-                    if (!(col2&1)) res += coA[0][col2] * __cofactor(cocoA);
-                    else res -= coA[0][col2] * __cofactor(cocoA);
-                }
-                return res;
-            }
-        public:
-            size_t row;
-            size_t col;
-            Matrix(size_t row=1, size_t col=1) {
-                this->row = row;
-                this->col = col;
-                this->A.resize(row);
-                for(size_t i=0; i<row; i++) this->A[i].resize(col);
-            }
-
-            vector<T>& operator[](const size_t i) {
-                return this->A[i];
-            }
-
-            Matrix& operator+=(Matrix other) {
-                for(size_t i=0; i<this->row; i++) {
-                    for(size_t j=0; j<this->col; j++) {
-                        this->A[i][j] += other[i][j];
-                    }
-                }
-                return *this;
-            }
-            Matrix operator+(const Matrix other) const {
-                return Matrix(*this) += other;
-            }
-            Matrix& operator+=(const double a) {
-                /* 各要素にaを足す */
-                for (size_t i=0; i<this->row; i++) {
-                    for (size_t j=0; j<this->col; j++) {
-                        this->A[i][j] += a;
-                    }
-                }
-                return *this;
-            }
-            Matrix operator+(const double a) const {
-                return Matrix(*this) += a;
-            }
-
-            Matrix& operator-=(Matrix other) {
-                for(size_t i=0; i<this->row; i++) {
-                    for(size_t j=0; j<this->col; j++) {
-                        this->A[i][j] -= other[i][j];
-                    }
-                }
-                return *this;
-            }
-            Matrix operator-(const Matrix other) const {
-                return Matrix(*this) -= other;
-            }
-            Matrix operator-() const {
-                Matrix res(this->row, this->col);
-                for (size_t i=0; i<this->row; i++) {
-                    for (size_t j=0; j<this->col; j++) {
-                        res[i][j] = -this->A[i][j];
-                    }
-                }
-                return res;
-            }
-            Matrix& operator-=(const double a) {
-                /* 各要素にaを引く */
-                for (size_t i=0; i<this->row; i++) {
-                    for (size_t j=0; j<this->col; j++) {
-                        this->A[i][j] -= a;
-                    }
-                }
-                return *this;
-            }
-            Matrix operator-(const double a) const {
-                return Matrix(*this) -= a;
-            }
-
-            Matrix& operator*=(Matrix other) {
-                /* NxN行列 x NxN行列 の積を求める */
-                if (!(this->row==this->col && other.row==other.col && this->row==other.row)) throw matrix_product_error();
-
-                vector<vector<T>> res(this->row, vector<T>(this->col, 0));
-                for(size_t i=0; i<other.row; i++) {
-                    for (size_t j=0; j<this->col; j++) {
-                        for (size_t k=0; k<this->col; k++) {
-                            res[i][j] += this->A[i][k]*other[k][j];
-                        }
-                    }
-                }
-                this->A = res;
-                return *this;
-            }
-            Matrix operator*(Matrix other) const {
-                /* ixk行列 * kxj行列 の積を求める */
-                if (this->col!=other.row) throw matrix_product_error();
-
-                Matrix<T> res(this->row, other.col);
-                for (size_t i=0; i<this->row; i++) {
-                    for (size_t j=0; j<other.col; j++) {
-                        for (size_t k=0; k<this->col; k++) {
-                            res[i][j] += this->A[i][k]*other[k][j];
-                        }
-                    }
-                }
-                return res;
-            }
-
-            Matrix& operator*=(const double a) {
-                /* 各要素にaをかける */
-                for (size_t i=0; i<this->row; i++) {
-                    for (size_t j=0; j<this->col; j++) {
-                        this->A[i][j] *= a;
-                    }
-                }
-                return *this;
-            }
-            Matrix operator*(const double a) const {
-                return Matrix(*this) *= a;
-            }
-
-            void print() {
-                /* 行列の状態を表示する */
-                string format;
-                if (typeid(T)==typeid(int)) format = "%*d"s;
-                else if (typeid(T)==typeid(unsigned int) || typeid(T)==typeid(unsigned short)) format = "%*u"s;
-                else if (typeid(T)==typeid(long)) format = "%*ld"s;
-                else if (typeid(T)==typeid(unsigned long)) format = "%*lu"s;
-                else if (typeid(T)==typeid(long long)) format = "%*lld"s;
-                else if (typeid(T)==typeid(unsigned long long)) format = "%*llu"s;
-                else if (typeid(T)==typeid(short)) format = "%*f"s;
-                else if (typeid(T)==typeid(double)) format = "%*lf"s;
-                else if (typeid(T)==typeid(long double)) format = "%*LF"s;
-                else throw print_format_error();
-
-                int len = 0;
-                for (size_t i=0; i<this->row; i++) {
-                    for (size_t j=0; j<this->col; j++) {
-                        string str = to_string(this->A[i][j]);
-                        len = max(len, (int)str.size());
-                    }
-                }
-
-                printf("[[");
-                for (size_t i=0; i<this->row; i++) {
-                    for (size_t j=0; j<this->col; j++) {
-                        printf(format.c_str(), len, this->A[i][j]);
-                        if (j!=this->col-1) printf(", ");
-                        else printf("]");
-                    }
-                    if (i!=this->row-1) printf(",\n  ");
-                    else printf("]\n");
-                }
-            }
-
-            T det() const {
-                /* 行列式を計算して返す */
-                if (this->row!=this->col) throw determinant_error();
-
-                return this->__cofactor(this->A);
-            }
-
-            Matrix dot(const Matrix B) const {
-                /* ドット積（内積）計算をする */
-                return Matrix(*this) * B;
-            }
-
-            Matrix inv() const {
-                /* 逆行列を返す（掃き出し法） */
-                if (!(this->row==this->col)) throw inversion_error();
-
-                size_t N = this->row;
-                Matrix<T> A = *this;
-                Matrix<T> invA(N, N);
-                for (size_t i=0; i<N; i++) {
-                    for (size_t j=0; j<N; j++) {
-                        invA[i][j] = (i==j) ? 1 : 0;
-                    }
-                }
-
-                for (size_t i=0; i<N; i++) {
-                    T buf = 1/A[i][i];
-                    for (size_t j=0; j<N; j++) {
-                        A[i][j] *= buf;
-                        invA[i][j] *= buf;
-                    }
-
-                    for (size_t j=0; j<N; j++) {
-                        if (i!=j) {
-                            buf = A[j][i];
-                            for (size_t k=0; k<N; k++) {
-                                A[j][k] -= A[i][k]*buf;
-                                invA[j][k] -= invA[i][k]*buf;
-                            }
-                        }
-                    }
-                }
-
-                return invA;
-            }
-
-            Matrix pow(long N){
-                Matrix mat = (*this);
-                Matrix res(mat.row,mat.col);
-                for (size_t i=0; i<mat.row; i++) {
-                    for (size_t j=0; j<mat.row; j++) {
-                        res[i][j] = (i==j) ? 1 : 0;
-                    }
-                }
-                while(N){
-                    if(N%2==1){
-                        res *= mat;
-                    }
-                    mat *= mat;
-                    N/=2;
-                }
-                return res;
-            }
-    };
-
-    
-}
-
-using namespace MatrixLib;
-
-const int MOD = 1000000007;
+const int MOD = 1e9;
 using mint = Fp<MOD>;
 
 
-/*
-00
-01
-10
-11
-
-*/
 int main(void){
-    long K,N;cin>>K>>N;
-    Matrix<mint> mat(1<<K,1<<K);
-    for(int i=0;i<(1<<K);i++){
-        
-    }
-    Matrix<mint> r(1<<K,1);
-    auto m2 = mat.pow(N-3) * r;
-    mint sum = 0;
-    for(int i=0;i<m2.row;i++)sum += m2[i][0];
-    cout<<sum<<endl;
+    long N;cin>>N;
+    Matrix<mint> mat(2,2);
+    mat[0][0] = 1;
+    mat[0][1] = 1;
+    mat[1][0] = 1;
+    mat[1][1] = 0;
+    auto ans = pow(mat,N-1);
+    cout<<ans[0][0]<<endl;
 }
+
+
