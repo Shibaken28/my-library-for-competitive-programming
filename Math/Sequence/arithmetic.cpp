@@ -153,6 +153,7 @@ long arithWhere(long a,long d,long b){
 }
 
 
+
 int main(void){
     long a,d;
     /*

@@ -36,6 +36,10 @@ long arithWhere(long a,long d,long b){
     return -1;
 }
 
+
+
+//
+
 ```
 ## 実行例
 ```cpp
