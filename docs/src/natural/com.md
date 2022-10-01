@@ -1,10 +1,10 @@
 # 二項係数(mod)
 
 ## 概要
-二項係数\\({}_a \mathrm{C}_b (0\leq a,b\leq N )\\)を素数\\(P\\)で割った余りを求める．
+二項係数${}_a \mathrm{C}_b (0\leq a,b\leq N )$を素数$P$で割った余りを求める．
 
 ## 計算量
-前計算\\(O(N\log P)\\)，クエリ\\(O(1)\\)
+前計算$O(N\log P)$，クエリ$O(1)$
 ## ソースコード
 ```cpp
 template<class T> struct Combination{

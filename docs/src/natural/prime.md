@@ -2,7 +2,7 @@
 ## 概要
 素数かどうかを判定する．
 ## 計算量
-\\(O(\sqrt{N})\\)
+$O(\sqrt{N})$
 ## ソースコード
 ```cpp
 bool isPrime(long N){

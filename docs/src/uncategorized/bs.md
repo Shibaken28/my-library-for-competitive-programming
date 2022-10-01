@@ -3,12 +3,12 @@
 C++には`lower_bound`や`upper_bound`，`binary_search`が用意されているが，例外処理が面倒なので関数したもの．
 次の関数を作成した．
 - その数が存在するかの`isExist`
-- \\(x\\)以上の最小の数を探す`lowerElement`
-- \\(x\\)より大きい最小の数を探す`upperlement`
-- \\(x\\)以下の最大の数を探す`underElement`
-- \\(x\\)未満の最大の数を探す`lessElement`
-- \\(x\\)の個数を数える`countElement`
-- \\(l\\)以上\\(r\\)以下の個数を数える`countElementInRange`
+- $x$以上の最小の数を探す`lowerElement`
+- $x$より大きい最小の数を探す`upperlement`
+- $x$以下の最大の数を探す`underElement`
+- $x$未満の最大の数を探す`lessElement`
+- $x$の個数を数える`countElement`
+- $l$以上$r$以下の個数を数える`countElementInRange`
 ## 注意
 `vector`はソート済みである必要がある．
 

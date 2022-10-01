@@ -7,3 +7,4 @@ title = "shiba's Library"
 
 [output.html]
 mathjax-support = true
+additional-js = ["./mathjax-config.js"]
