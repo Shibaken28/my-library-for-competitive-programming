@@ -12,6 +12,11 @@
 
         <!-- Custom HTML head -->
         
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$']]}
+  });
+</script>
 
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -381,6 +386,59 @@ vector&lt;vector&lt;long&gt;&gt; floydWarshall(vector&lt;vector&lt;long&gt;&gt; 
 
 </code></pre>
 <h1 id="2部グラフ判定"><a class="header" href="#2部グラフ判定">❌2部グラフ判定</a></h1>
+<h2 id="概要-4"><a class="header" href="#概要-4">概要</a></h2>
+<p>2部グラフであるかを判定する．</p>
+<h2 id="アルゴリズム"><a class="header" href="#アルゴリズム">アルゴリズム</a></h2>
+<p>BFSで隣り合う頂点を異なる2色で塗っていき，最後に全ての隣り合う頂点が異なる色で塗られているかを判定する．計算量は$O\log(V+E)$</p>
+<h2 id="ソースコード-4"><a class="header" href="#ソースコード-4">ソースコード</a></h2>
+<pre><code class="language-cpp">struct Edge{
+    int to;
+};
+
+using Graph = vector&lt;vector&lt;Edge&gt;&gt;; //隣接グラフ
+
+
+/*
+ダイクストラ法
+重みはlong型
+始点s，グラフGの点をDに
+*/
+void bfs(int n,int pre,Graph &amp;G,vector&lt;int&gt;&amp;C){
+    for(auto&amp;e:G[n]){
+        if(C[e.to]!=-1)continue;
+        C[e.to] = 1-C[n];
+        bfs(e.to,n,G,C);
+    }
+}
+
+int main(){
+    int N,M;cin&gt;&gt;N&gt;&gt;M;
+    Graph G(N);
+    for(int i=0;i&lt;M;i++){
+        int u,v;
+        cin&gt;&gt;u&gt;&gt;v;
+        u--;v--;
+        G[u].push_back({v});
+        G[v].push_back({u});
+    }
+    vector&lt;int&gt;C(N,-1);
+    for(int i=0;i&lt;N;i++){
+        if(C[i] != -1)continue;
+        C[i]=0;
+        bfs(i,-1,G,C);
+    }
+    bool ok = true;
+    for(int i=0;i&lt;N;i++){
+        //cout&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;C[i]&lt;&lt;endl;
+        for(auto&amp;e:G[i]){
+            if(C[e.to] == C[i]){
+                ok = false;
+            }
+        }
+    }
+    cout&lt;&lt;(ok?&quot;Yes&quot;:&quot;No&quot;)&lt;&lt;endl;
+}
+</code></pre>
 <h1 id="n頂点n辺グラフ分析"><a class="header" href="#n頂点n辺グラフ分析">❌N頂点N辺グラフ分析</a></h1>
 <h1 id="サイクル検出"><a class="header" href="#サイクル検出">❌サイクル検出</a></h1>
 <h1 id="橋検出"><a class="header" href="#橋検出">❌橋検出</a></h1>
@@ -388,11 +446,11 @@ vector&lt;vector&lt;long&gt;&gt; floydWarshall(vector&lt;vector&lt;long&gt;&gt; 
 <h1 id="木の直径"><a class="header" href="#木の直径">❌木の直径</a></h1>
 <h1 id="01bfs"><a class="header" href="#01bfs">❌01BFS</a></h1>
 <h1 id="level-ancestor"><a class="header" href="#level-ancestor">Level Ancestor</a></h1>
-<h2 id="概要-4"><a class="header" href="#概要-4">概要</a></h2>
+<h2 id="概要-5"><a class="header" href="#概要-5">概要</a></h2>
 <p>根つき木で，前計算を行うことで，ある頂点の$x$個先の祖先，ある頂点で深さが$d$である祖先を高速に求める．</p>
 <h2 id="計算量-3"><a class="header" href="#計算量-3">計算量</a></h2>
 <p>頂点数を$N$とすると前計算$O(N\log N)$，各クエリ$O(\log N)$で動作．</p>
-<h2 id="ソースコード-4"><a class="header" href="#ソースコード-4">ソースコード</a></h2>
+<h2 id="ソースコード-5"><a class="header" href="#ソースコード-5">ソースコード</a></h2>
 <pre><code class="language-cpp">
 struct Edge{
     int to;
@@ -453,11 +511,11 @@ struct LA{
 };
 </code></pre>
 <h1 id="lowest-common-ancestor"><a class="header" href="#lowest-common-ancestor">Lowest Common Ancestor</a></h1>
-<h2 id="概要-5"><a class="header" href="#概要-5">概要</a></h2>
+<h2 id="概要-6"><a class="header" href="#概要-6">概要</a></h2>
 <p>2つの頂点について，それぞれの共通祖先のうち最も深いものを求める．</p>
 <h2 id="計算量-4"><a class="header" href="#計算量-4">計算量</a></h2>
 <p>前計算$O(N\log N)$，クエリ$O(\log N)$</p>
-<h2 id="ソースコード-5"><a class="header" href="#ソースコード-5">ソースコード</a></h2>
+<h2 id="ソースコード-6"><a class="header" href="#ソースコード-6">ソースコード</a></h2>
 <pre><code class="language-cpp">struct Edge{
     int to;
 };
@@ -546,7 +604,7 @@ struct LA{
 <h1 id="binary-indexed-tree-2d"><a class="header" href="#binary-indexed-tree-2d">❌Binary Indexed Tree 2d</a></h1>
 <h1 id="列挙"><a class="header" href="#列挙">列挙</a></h1>
 <h1 id="順列列挙"><a class="header" href="#順列列挙">順列列挙</a></h1>
-<h2 id="概要-6"><a class="header" href="#概要-6">概要</a></h2>
+<h2 id="概要-7"><a class="header" href="#概要-7">概要</a></h2>
 <p>次を列挙できる</p>
 <ul>
 <li>$0,1,2,3,...,N-1$の要素数$N$個の順列，要素の重複なし</li>
@@ -557,7 +615,7 @@ struct LA{
 </ul>
 <h2 id="計算量-5"><a class="header" href="#計算量-5">計算量</a></h2>
 <p>よくわからん</p>
-<h2 id="ソースコード-6"><a class="header" href="#ソースコード-6">ソースコード</a></h2>
+<h2 id="ソースコード-7"><a class="header" href="#ソースコード-7">ソースコード</a></h2>
 <pre><code class="language-cpp">vector&lt;vector&lt;int&gt;&gt; permutations(int N){
     vector&lt;int&gt; array(N);
     vector&lt;vector&lt;int&gt;&gt; A(0);
@@ -625,9 +683,9 @@ int main(void){
 
 </code></pre>
 <h1 id="ビットの部分集合列挙"><a class="header" href="#ビットの部分集合列挙">ビットの部分集合列挙</a></h1>
-<h2 id="概要-7"><a class="header" href="#概要-7">概要</a></h2>
+<h2 id="概要-8"><a class="header" href="#概要-8">概要</a></h2>
 <p>ある非負整数$x$があるとき，$x|a =x$となるような$a$を列挙する</p>
-<h2 id="ソースコード-7"><a class="header" href="#ソースコード-7">ソースコード</a></h2>
+<h2 id="ソースコード-8"><a class="header" href="#ソースコード-8">ソースコード</a></h2>
 <pre><code class="language-cpp">vector&lt;long&gt; bitsub(long x){
     vector&lt;long&gt; A(0);
     //xの部分集合
@@ -640,11 +698,11 @@ int main(void){
 </code></pre>
 <h1 id="整数"><a class="header" href="#整数">整数</a></h1>
 <h1 id="素数判定"><a class="header" href="#素数判定">素数判定</a></h1>
-<h2 id="概要-8"><a class="header" href="#概要-8">概要</a></h2>
+<h2 id="概要-9"><a class="header" href="#概要-9">概要</a></h2>
 <p>素数かどうかを判定する．</p>
 <h2 id="計算量-6"><a class="header" href="#計算量-6">計算量</a></h2>
 <p>$O(\sqrt{N})$</p>
-<h2 id="ソースコード-8"><a class="header" href="#ソースコード-8">ソースコード</a></h2>
+<h2 id="ソースコード-9"><a class="header" href="#ソースコード-9">ソースコード</a></h2>
 <pre><code class="language-cpp">bool isPrime(long N){
     if(N&lt;=1)return false;
     for(long i=2;i*i&lt;=N;i++){
@@ -656,7 +714,7 @@ int main(void){
 }
 </code></pre>
 <h1 id="素数篩"><a class="header" href="#素数篩">素数篩</a></h1>
-<h2 id="概要-9"><a class="header" href="#概要-9">概要</a></h2>
+<h2 id="概要-10"><a class="header" href="#概要-10">概要</a></h2>
 <p>エラトステネスの篩．</p>
 <h2 id="計算量-7"><a class="header" href="#計算量-7">計算量</a></h2>
 <p>$1$から$N$までの全ての整数を素数判定する(篩の処理)場合は$\sqrt{N}\log \sqrt{N}$．
@@ -666,7 +724,7 @@ int main(void){
 <li><del>$N$以下の数の約数列挙が$O(\log N)$</del>(未実装)</li>
 </ul>
 <p>で可能になる．</p>
-<h2 id="ソースコード-9"><a class="header" href="#ソースコード-9">ソースコード</a></h2>
+<h2 id="ソースコード-10"><a class="header" href="#ソースコード-10">ソースコード</a></h2>
 <pre><code class="language-cpp">struct primeSieve{
     vector&lt;long&gt; mfactor;
     //既知の素数(随時追加される)
@@ -772,11 +830,11 @@ int main(void){
 }
 </code></pre>
 <h1 id="約数列挙"><a class="header" href="#約数列挙">約数列挙</a></h1>
-<h2 id="概要-10"><a class="header" href="#概要-10">概要</a></h2>
+<h2 id="概要-11"><a class="header" href="#概要-11">概要</a></h2>
 <p>正の整数$N$の約数を列挙する</p>
 <h2 id="計算量-8"><a class="header" href="#計算量-8">計算量</a></h2>
 <p>$O(\sqrt{N})$</p>
-<h2 id="ソースコード-10"><a class="header" href="#ソースコード-10">ソースコード</a></h2>
+<h2 id="ソースコード-11"><a class="header" href="#ソースコード-11">ソースコード</a></h2>
 <pre><code class="language-cpp">//約数列挙
 vector&lt;long&gt; divisor(long x){
     vector&lt;long&gt; f(0);
@@ -791,11 +849,11 @@ vector&lt;long&gt; divisor(long x){
 }
 </code></pre>
 <h1 id="素因数分解"><a class="header" href="#素因数分解">素因数分解</a></h1>
-<h2 id="概要-11"><a class="header" href="#概要-11">概要</a></h2>
+<h2 id="概要-12"><a class="header" href="#概要-12">概要</a></h2>
 <p>$2$以上の正の整数$N$の素因数分解する</p>
 <h2 id="計算量-9"><a class="header" href="#計算量-9">計算量</a></h2>
 <p>$O(\sqrt{N})$</p>
-<h2 id="ソースコード-11"><a class="header" href="#ソースコード-11">ソースコード</a></h2>
+<h2 id="ソースコード-12"><a class="header" href="#ソースコード-12">ソースコード</a></h2>
 <pre><code class="language-cpp">//素因数分解
 vector&lt;long&gt; factor(long x){
     vector&lt;long&gt; f(0);
@@ -828,11 +886,11 @@ vector&lt;pair&lt;long,long&gt;&gt; factor2(long x){
 }
 </code></pre>
 <h1 id="累乗根"><a class="header" href="#累乗根">累乗根</a></h1>
-<h2 id="概要-12"><a class="header" href="#概要-12">概要</a></h2>
+<h2 id="概要-13"><a class="header" href="#概要-13">概要</a></h2>
 <p>$y,n$から$x^n\leq y$を満たすような最大の整数$x$を求める．</p>
 <h2 id="計算量-10"><a class="header" href="#計算量-10">計算量</a></h2>
 <p>$O(\log N)$</p>
-<h2 id="ソースコード-12"><a class="header" href="#ソースコード-12">ソースコード</a></h2>
+<h2 id="ソースコード-13"><a class="header" href="#ソースコード-13">ソースコード</a></h2>
 <pre><code class="language-cpp">long iroot(long y,int n){
     //x^n &lt;= yとなる最大のn
     long ok = 0;
@@ -856,11 +914,11 @@ vector&lt;pair&lt;long,long&gt;&gt; factor2(long x){
 </code></pre>
 <h1 id="2次方程式"><a class="header" href="#2次方程式">❌2次方程式</a></h1>
 <h1 id="パスカルの3角形"><a class="header" href="#パスカルの3角形">パスカルの3角形</a></h1>
-<h2 id="概要-13"><a class="header" href="#概要-13">概要</a></h2>
+<h2 id="概要-14"><a class="header" href="#概要-14">概要</a></h2>
 <p>パスカルの三角形によって二項係数${}_a \mathrm{C}_b (0\leq a,b\leq N )$を求める．</p>
 <h2 id="計算量-11"><a class="header" href="#計算量-11">計算量</a></h2>
 <p>前計算$O(N^2)$，クエリ$O(1)$</p>
-<h2 id="ソースコード-13"><a class="header" href="#ソースコード-13">ソースコード</a></h2>
+<h2 id="ソースコード-14"><a class="header" href="#ソースコード-14">ソースコード</a></h2>
 <pre><code class="language-cpp">struct Pascal{
     //tri[a][b] = aCb
     vector&lt;vector&lt;long&gt;&gt; tri;
@@ -891,7 +949,7 @@ vector&lt;pair&lt;long,long&gt;&gt; factor2(long x){
 <h1 id="modint構造体"><a class="header" href="#modint構造体">modint構造体</a></h1>
 <h2 id="参考"><a class="header" href="#参考">参考</a></h2>
 <p><a href="https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod.cpp">https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod.cpp</a></p>
-<h2 id="ソースコード-14"><a class="header" href="#ソースコード-14">ソースコード</a></h2>
+<h2 id="ソースコード-15"><a class="header" href="#ソースコード-15">ソースコード</a></h2>
 <pre><code class="language-cpp">// modint: mod 計算を int を扱うように扱える構造体
 template&lt;int MOD&gt; struct Fp {
     long long val;
@@ -953,7 +1011,7 @@ template&lt;int MOD&gt; struct Fp {
 <h1 id="実行時に法が決まるmodint構造体"><a class="header" href="#実行時に法が決まるmodint構造体">実行時に法が決まるmodint構造体</a></h1>
 <h2 id="参考-1"><a class="header" href="#参考-1">参考</a></h2>
 <p><a href="https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod_runtime.cpp">https://github.com/drken1215/algorithm/blob/master/MathCombinatorics/mod_runtime.cpp</a></p>
-<h2 id="ソースコード-15"><a class="header" href="#ソースコード-15">ソースコード</a></h2>
+<h2 id="ソースコード-16"><a class="header" href="#ソースコード-16">ソースコード</a></h2>
 <pre><code class="language-cpp">// modint: mod 計算を int を扱うように扱える構造体
 template&lt;int MOD&gt; struct Fp {
     long long val;
@@ -1013,11 +1071,11 @@ template&lt;int MOD&gt; struct Fp {
 
 </code></pre>
 <h1 id="二項係数mod"><a class="header" href="#二項係数mod">二項係数(mod)</a></h1>
-<h2 id="概要-14"><a class="header" href="#概要-14">概要</a></h2>
+<h2 id="概要-15"><a class="header" href="#概要-15">概要</a></h2>
 <p>二項係数${}_a \mathrm{C}_b (0\leq a,b\leq N )$を素数$P$で割った余りを求める．</p>
 <h2 id="計算量-12"><a class="header" href="#計算量-12">計算量</a></h2>
 <p>前計算$O(N\log P)$，クエリ$O(1)$</p>
-<h2 id="ソースコード-16"><a class="header" href="#ソースコード-16">ソースコード</a></h2>
+<h2 id="ソースコード-17"><a class="header" href="#ソースコード-17">ソースコード</a></h2>
 <pre><code class="language-cpp">template&lt;class T&gt; struct Combination{
     int N;
     vector&lt;T&gt; fac;//階乗
@@ -1045,11 +1103,11 @@ template&lt;int MOD&gt; struct Fp {
 
 </code></pre>
 <h1 id="ルーカスの定理による二項係数"><a class="header" href="#ルーカスの定理による二項係数">ルーカスの定理による二項係数</a></h1>
-<h2 id="概要-15"><a class="header" href="#概要-15">概要</a></h2>
+<h2 id="概要-16"><a class="header" href="#概要-16">概要</a></h2>
 <p>ルーカスの定理によって二項係数を素数$P$で割った余りを計算する．</p>
 <h2 id="計算量-13"><a class="header" href="#計算量-13">計算量</a></h2>
 <p>前計算$O(P^2)$，二項係数計算に$O(\log P) $</p>
-<h2 id="ソースコード-17"><a class="header" href="#ソースコード-17">ソースコード</a></h2>
+<h2 id="ソースコード-18"><a class="header" href="#ソースコード-18">ソースコード</a></h2>
 <pre><code class="language-cpp">template&lt;int MOD&gt; struct Lucas{
     Pascal pas{MOD};
     Lucas(){
@@ -1068,9 +1126,9 @@ template&lt;int MOD&gt; struct Fp {
 
 </code></pre>
 <h1 id="2元1次不定方程式"><a class="header" href="#2元1次不定方程式">2元1次不定方程式</a></h1>
-<h2 id="概要-16"><a class="header" href="#概要-16">概要</a></h2>
+<h2 id="概要-17"><a class="header" href="#概要-17">概要</a></h2>
 <p>非負整数$a,b$に対して$ax + by = 1$ を解く．一般解が求められる．</p>
-<h2 id="ソースコード-18"><a class="header" href="#ソースコード-18">ソースコード</a></h2>
+<h2 id="ソースコード-19"><a class="header" href="#ソースコード-19">ソースコード</a></h2>
 <pre><code class="language-cpp">// 返り値: a と b の最大公約数
 // ax + by = gcd(a, b) を満たす (x, y) が格納される
 long extGCD(long a, long b, long &amp;x, long &amp;y) {
@@ -1105,10 +1163,10 @@ bool Bezout(long a,long b,long c,long &amp;alpha,long &amp;beta,long &amp;gamma,
 
 </code></pre>
 <h1 id="lcdgcd"><a class="header" href="#lcdgcd">LCD,GCD</a></h1>
-<h2 id="概要-17"><a class="header" href="#概要-17">概要</a></h2>
+<h2 id="概要-18"><a class="header" href="#概要-18">概要</a></h2>
 <p>最大公約数(GCD)，最小公倍数(LCM)を求める</p>
 <h2 id="計算量-14"><a class="header" href="#計算量-14">計算量</a></h2>
-<h2 id="ソースコード-19"><a class="header" href="#ソースコード-19">ソースコード</a></h2>
+<h2 id="ソースコード-20"><a class="header" href="#ソースコード-20">ソースコード</a></h2>
 <pre><code class="language-cpp">
 long GCD(long a,long b){
     if(a&lt;b)return GCD(b,a);
@@ -1135,9 +1193,9 @@ long LCM(vector&lt;long&gt;&amp;A){
 
 </code></pre>
 <h1 id="中国剰余定理"><a class="header" href="#中国剰余定理">中国剰余定理</a></h1>
-<h2 id="概要-18"><a class="header" href="#概要-18">概要</a></h2>
+<h2 id="概要-19"><a class="header" href="#概要-19">概要</a></h2>
 <p>$a$で割った余りが$b$，$c$で割った余りが$d$を満たす数を求める．</p>
-<h2 id="ソースコード-20"><a class="header" href="#ソースコード-20">ソースコード</a></h2>
+<h2 id="ソースコード-21"><a class="header" href="#ソースコード-21">ソースコード</a></h2>
 <pre><code class="language-cpp">// 返り値: a と b の最大公約数
 // ax + by = gcd(a, b) を満たす (x, y) が格納される
 long extGCD(long a, long b, long &amp;x, long &amp;y) {
@@ -1186,11 +1244,11 @@ bool CRT(const vector&lt;pair&lt;long,long&gt;&gt; &amp;X,long &amp;r,long &amp;
 <h1 id="中国剰余定理garners-algorithm"><a class="header" href="#中国剰余定理garners-algorithm">❌中国剰余定理(Garner's algorithm)</a></h1>
 <h1 id="cipollas-algorithm"><a class="header" href="#cipollas-algorithm">❌Cipolla's algorithm</a></h1>
 <h1 id="baby-step-giant-step"><a class="header" href="#baby-step-giant-step">baby step giant step</a></h1>
-<h2 id="概要-19"><a class="header" href="#概要-19">概要</a></h2>
+<h2 id="概要-20"><a class="header" href="#概要-20">概要</a></h2>
 <p>素数$p$と$0\leq a,b&lt; p $について，$a^x = b \mod p$となる$x$を求める．</p>
 <h2 id="計算量-15"><a class="header" href="#計算量-15">計算量</a></h2>
 <p>$O(\sqrt{p} \log \sqrt{p})$</p>
-<h2 id="ソースコード-21"><a class="header" href="#ソースコード-21">ソースコード</a></h2>
+<h2 id="ソースコード-22"><a class="header" href="#ソースコード-22">ソースコード</a></h2>
 <pre><code class="language-cpp">long  extgcd(long a,long b,long &amp; x,long &amp; y){
     long d = a;
     if(b != 0) {
@@ -1265,9 +1323,9 @@ long BSGS(long a,long b,long p){
 </code></pre>
 <h1 id="線形代数"><a class="header" href="#線形代数">線形代数</a></h1>
 <h1 id="3次元ベクトル構造体"><a class="header" href="#3次元ベクトル構造体">3次元ベクトル構造体</a></h1>
-<h2 id="概要-20"><a class="header" href="#概要-20">概要</a></h2>
+<h2 id="概要-21"><a class="header" href="#概要-21">概要</a></h2>
 <p>3次元ベクトルの加算減算，外積が計算できる</p>
-<h2 id="ソースコード-22"><a class="header" href="#ソースコード-22">ソースコード</a></h2>
+<h2 id="ソースコード-23"><a class="header" href="#ソースコード-23">ソースコード</a></h2>
 <pre><code class="language-cpp">template&lt;class T&gt; struct Vector3D{
     T x{0};
     T y{0};
@@ -1314,8 +1372,8 @@ long BSGS(long a,long b,long p){
 
 </code></pre>
 <h1 id="行列"><a class="header" href="#行列">行列</a></h1>
-<h2 id="概要-21"><a class="header" href="#概要-21">概要</a></h2>
-<h2 id="ソースコード-23"><a class="header" href="#ソースコード-23">ソースコード</a></h2>
+<h2 id="概要-22"><a class="header" href="#概要-22">概要</a></h2>
+<h2 id="ソースコード-24"><a class="header" href="#ソースコード-24">ソースコード</a></h2>
 <p><a href="https://github.com/drken1215/algorithm/blob/master/MathAlgebra/matrix.cpp">参考</a></p>
 <pre><code class="language-cpp">// matrix
 template&lt;class T&gt; struct Matrix {
@@ -1389,9 +1447,9 @@ template&lt;class T&gt; Matrix&lt;T&gt; operator - (const Matrix&lt;T&gt; &amp;A
 <h1 id="分数"><a class="header" href="#分数">❌分数</a></h1>
 <h1 id="幾何"><a class="header" href="#幾何">幾何</a></h1>
 <h1 id="線分の交差判定"><a class="header" href="#線分の交差判定">線分の交差判定</a></h1>
-<h2 id="概要-22"><a class="header" href="#概要-22">概要</a></h2>
+<h2 id="概要-23"><a class="header" href="#概要-23">概要</a></h2>
 <p>線分同士が共通する点を持つかを判定．</p>
-<h2 id="ソースコード-24"><a class="header" href="#ソースコード-24">ソースコード</a></h2>
+<h2 id="ソースコード-25"><a class="header" href="#ソースコード-25">ソースコード</a></h2>
 <pre><code class="language-cpp">
 inline bool rangeInRange(long l0,long r0,long l1,long r1){
     if(l0&gt;r0)swap(l0,r0);
@@ -1432,7 +1490,7 @@ bool isIntersects(long x1,long y1,long x2,long y2,long x3,long y3,long x4,long y
 </code></pre>
 <h1 id="数列"><a class="header" href="#数列">数列</a></h1>
 <h1 id="等差数列"><a class="header" href="#等差数列">等差数列</a></h1>
-<h2 id="概要-23"><a class="header" href="#概要-23">概要</a></h2>
+<h2 id="概要-24"><a class="header" href="#概要-24">概要</a></h2>
 <p>$O(1)$で等差数列の次の項目を求める．</p>
 <ul>
 <li>第$n$項までの和</li>
@@ -1440,7 +1498,7 @@ bool isIntersects(long x1,long y1,long x2,long y2,long x3,long y3,long x4,long y
 <li>第$l$項目から第$r$項目までの和</li>
 <li>$b$は何項目であるか</li>
 </ul>
-<h2 id="ソースコード-25"><a class="header" href="#ソースコード-25">ソースコード</a></h2>
+<h2 id="ソースコード-26"><a class="header" href="#ソースコード-26">ソースコード</a></h2>
 <pre><code class="language-cpp">//初項s公差d第n項までの和
 long arithSum(long a,long d,long n){
     return n*(2*a+(n-1)*d)/2;
@@ -1516,9 +1574,9 @@ long arithWhere(long a,long d,long b){
 <h1 id="階差数列"><a class="header" href="#階差数列">階差数列</a></h1>
 <h1 id="未分類"><a class="header" href="#未分類">未分類</a></h1>
 <h1 id="imos法"><a class="header" href="#imos法">imos法</a></h1>
-<h2 id="概要-24"><a class="header" href="#概要-24">概要</a></h2>
+<h2 id="概要-25"><a class="header" href="#概要-25">概要</a></h2>
 <p>要素数$N$の数列について，区間への加算を$O(1)$で行い，$O(N)$の処理を行うことで各値が$O(1)$で得られる．</p>
-<h2 id="ソースコード-26"><a class="header" href="#ソースコード-26">ソースコード</a></h2>
+<h2 id="ソースコード-27"><a class="header" href="#ソースコード-27">ソースコード</a></h2>
 <pre><code class="language-cpp">template&lt;class T&gt; struct Imos{
     vector&lt;T&gt; A;
     int N;
@@ -1546,8 +1604,8 @@ long arithWhere(long a,long d,long b){
 };
 </code></pre>
 <h1 id="2次元imos法"><a class="header" href="#2次元imos法">2次元imos法</a></h1>
-<h2 id="概要-25"><a class="header" href="#概要-25">概要</a></h2>
-<h2 id="ソースコード-27"><a class="header" href="#ソースコード-27">ソースコード</a></h2>
+<h2 id="概要-26"><a class="header" href="#概要-26">概要</a></h2>
+<h2 id="ソースコード-28"><a class="header" href="#ソースコード-28">ソースコード</a></h2>
 <pre><code class="language-cpp">template&lt;class T&gt; struct Imos2d{
     vector&lt;vector&lt;T&gt;&gt; A;
     int H,W;
@@ -1588,7 +1646,7 @@ long arithWhere(long a,long d,long b){
 };
 </code></pre>
 <h1 id="座標圧縮imos法"><a class="header" href="#座標圧縮imos法">座標圧縮imos法</a></h1>
-<h2 id="ソースコード-28"><a class="header" href="#ソースコード-28">ソースコード</a></h2>
+<h2 id="ソースコード-29"><a class="header" href="#ソースコード-29">ソースコード</a></h2>
 <pre><code class="language-cpp">template&lt;class T&gt; bool underElement(vector&lt;T&gt; &amp;A,T x,T &amp;find,int &amp;index){
     index = upper_bound(A.begin(),A.end(),x) - A.begin();
     index--;
@@ -1634,7 +1692,7 @@ template&lt;class T&gt; struct shrinkImos{
 };
 </code></pre>
 <h1 id="座標圧縮2次元imos法"><a class="header" href="#座標圧縮2次元imos法">座標圧縮2次元imos法</a></h1>
-<h2 id="ソースコード-29"><a class="header" href="#ソースコード-29">ソースコード</a></h2>
+<h2 id="ソースコード-30"><a class="header" href="#ソースコード-30">ソースコード</a></h2>
 <pre><code class="language-cpp">template&lt;class T&gt; bool underElement(vector&lt;T&gt; &amp;A,T x,T &amp;find,int &amp;index){
     index = upper_bound(A.begin(),A.end(),x) - A.begin();
     index--;
@@ -1732,7 +1790,7 @@ template&lt;class T1,class T2&gt; struct shrinkImos2d{
 <h1 id="累積和"><a class="header" href="#累積和">累積和</a></h1>
 <h1 id="2次元累積和"><a class="header" href="#2次元累積和">2次元累積和</a></h1>
 <h1 id="要素を2分探索"><a class="header" href="#要素を2分探索">要素を2分探索</a></h1>
-<h2 id="概要-26"><a class="header" href="#概要-26">概要</a></h2>
+<h2 id="概要-27"><a class="header" href="#概要-27">概要</a></h2>
 <p>C++には<code>lower_bound</code>や<code>upper_bound</code>，<code>binary_search</code>が用意されているが，例外処理が面倒なので関数したもの．
 次の関数を作成した．</p>
 <ul>
@@ -1746,7 +1804,7 @@ template&lt;class T1,class T2&gt; struct shrinkImos2d{
 </ul>
 <h2 id="注意-2"><a class="header" href="#注意-2">注意</a></h2>
 <p><code>vector</code>はソート済みである必要がある．</p>
-<h2 id="ソースコード-30"><a class="header" href="#ソースコード-30">ソースコード</a></h2>
+<h2 id="ソースコード-31"><a class="header" href="#ソースコード-31">ソースコード</a></h2>
 <pre><code class="language-cpp">/*
 Aにxが存在するか
 O(log N)
@@ -1951,9 +2009,9 @@ int main(){
 </code></pre>
 <h1 id="ctf暗号関連"><a class="header" href="#ctf暗号関連">CTF(暗号)関連</a></h1>
 <h1 id="longbytes変換"><a class="header" href="#longbytes変換">long,bytes変換</a></h1>
-<h2 id="概要-27"><a class="header" href="#概要-27">概要</a></h2>
+<h2 id="概要-28"><a class="header" href="#概要-28">概要</a></h2>
 <p><code>Crypto.Util.number</code>の<code>bytes_to_long,long_to_bytes</code>と同じ挙動をする(はず)．</p>
-<h2 id="ソースコード-31"><a class="header" href="#ソースコード-31">ソースコード</a></h2>
+<h2 id="ソースコード-32"><a class="header" href="#ソースコード-32">ソースコード</a></h2>
 <pre><code class="language-python">def bytesToLong(b : bytes):
     res = 0
     for a in b:
@@ -1974,9 +2032,9 @@ print(a)
 print(longToBytes(a))
 </code></pre>
 <h1 id="rho法素因数分解"><a class="header" href="#rho法素因数分解">rho法素因数分解</a></h1>
-<h2 id="概要-28"><a class="header" href="#概要-28">概要</a></h2>
+<h2 id="概要-29"><a class="header" href="#概要-29">概要</a></h2>
 <p>かなり粗い．素因数分解ができるかもしれない．だいたい$O(\sqrt{p})$な気がする</p>
-<h2 id="ソースコード-32"><a class="header" href="#ソースコード-32">ソースコード</a></h2>
+<h2 id="ソースコード-33"><a class="header" href="#ソースコード-33">ソースコード</a></h2>
 <pre><code class="language-python">import random
 
 def GCD(a,b):
@@ -2021,9 +2079,9 @@ N = int(input())
 print(factor(N))
 </code></pre>
 <h1 id="rsaテンプレ"><a class="header" href="#rsaテンプレ">RSAテンプレ</a></h1>
-<h2 id="概要-29"><a class="header" href="#概要-29">概要</a></h2>
+<h2 id="概要-30"><a class="header" href="#概要-30">概要</a></h2>
 <p><code>PyCryptodome</code>ライブラリを使用した実装例です．</p>
-<h2 id="ソースコード-33"><a class="header" href="#ソースコード-33">ソースコード</a></h2>
+<h2 id="ソースコード-34"><a class="header" href="#ソースコード-34">ソースコード</a></h2>
 <pre><code class="language-python">from Crypto.Util.number import getStrongPrime, bytes_to_long, long_to_bytes, inverse
 
 # 各パラメータの設定
@@ -2055,11 +2113,11 @@ print(&quot;[+} 計算結果&quot;)
 print(f'[+] {long_to_bytes(m2)}')
 </code></pre>
 <h1 id="baby-step-giant-step-1"><a class="header" href="#baby-step-giant-step-1">baby step giant step</a></h1>
-<h2 id="概要-30"><a class="header" href="#概要-30">概要</a></h2>
+<h2 id="概要-31"><a class="header" href="#概要-31">概要</a></h2>
 <p>素数$p$と$0\leq a,b&lt; p $について，$a^x = b \mod p$となる$x$を求める．</p>
 <h2 id="計算量-16"><a class="header" href="#計算量-16">計算量</a></h2>
 <p>$O(\sqrt{p}) $</p>
-<h2 id="ソースコード-34"><a class="header" href="#ソースコード-34">ソースコード</a></h2>
+<h2 id="ソースコード-35"><a class="header" href="#ソースコード-35">ソースコード</a></h2>
 <pre><code class="language-python">def iroot(N,a):
     # x^a &lt;= Nとなる最大の整数x
     ok = 0
@@ -2110,11 +2168,11 @@ print(x) #存在しない
 <p>存在しないと$-1$が返される．</p>
 <h1 id="中国剰余定理-1"><a class="header" href="#中国剰余定理-1">中国剰余定理</a></h1>
 <h1 id="gcdlcm"><a class="header" href="#gcdlcm">GCD,LCM</a></h1>
-<h2 id="概要-31"><a class="header" href="#概要-31">概要</a></h2>
+<h2 id="概要-32"><a class="header" href="#概要-32">概要</a></h2>
 <p>最大公約数，最小公倍数を求めます．</p>
 <h2 id="計算量-17"><a class="header" href="#計算量-17">計算量</a></h2>
 <p>$O(\log a)$</p>
-<h2 id="ソースコード-35"><a class="header" href="#ソースコード-35">ソースコード</a></h2>
+<h2 id="ソースコード-36"><a class="header" href="#ソースコード-36">ソースコード</a></h2>
 <pre><code class="language-python">def GCD(a,b):
     if a%b==0:
         return b
@@ -2134,11 +2192,11 @@ print(GCD(29879889137498173123,13918739184798747613272))
 </code></pre>
 <p>計算量が$O(\log a)$と小さいため大きな数でも簡単に求められる．</p>
 <h1 id="累乗根-1"><a class="header" href="#累乗根-1">累乗根</a></h1>
-<h2 id="概要-32"><a class="header" href="#概要-32">概要</a></h2>
+<h2 id="概要-33"><a class="header" href="#概要-33">概要</a></h2>
 <p>$y,n$から$x^n\leq y$を満たすような最大の整数$x$を求める．</p>
 <h2 id="計算量-18"><a class="header" href="#計算量-18">計算量</a></h2>
 <p>$O(\log N)$</p>
-<h2 id="ソースコード-36"><a class="header" href="#ソースコード-36">ソースコード</a></h2>
+<h2 id="ソースコード-37"><a class="header" href="#ソースコード-37">ソースコード</a></h2>
 <pre><code class="language-python">def iroot(N,a):
     # x^a &lt;= Nとなる最大の整数x
     ok = 0
