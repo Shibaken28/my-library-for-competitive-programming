@@ -10,6 +10,11 @@
 
         <!-- Custom HTML head -->
         
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$']]}
+  });
+</script>
 
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -167,6 +172,59 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="2部グラフ判定"><a class="header" href="#2部グラフ判定">❌2部グラフ判定</a></h1>
+<h2 id="概要"><a class="header" href="#概要">概要</a></h2>
+<p>2部グラフであるかを判定する．</p>
+<h2 id="アルゴリズム"><a class="header" href="#アルゴリズム">アルゴリズム</a></h2>
+<p>BFSで隣り合う頂点を異なる2色で塗っていき，最後に全ての隣り合う頂点が異なる色で塗られているかを判定する．計算量は$O\log(V+E)$</p>
+<h2 id="ソースコード"><a class="header" href="#ソースコード">ソースコード</a></h2>
+<pre><code class="language-cpp">struct Edge{
+    int to;
+};
+
+using Graph = vector&lt;vector&lt;Edge&gt;&gt;; //隣接グラフ
+
+
+/*
+ダイクストラ法
+重みはlong型
+始点s，グラフGの点をDに
+*/
+void bfs(int n,int pre,Graph &amp;G,vector&lt;int&gt;&amp;C){
+    for(auto&amp;e:G[n]){
+        if(C[e.to]!=-1)continue;
+        C[e.to] = 1-C[n];
+        bfs(e.to,n,G,C);
+    }
+}
+
+int main(){
+    int N,M;cin&gt;&gt;N&gt;&gt;M;
+    Graph G(N);
+    for(int i=0;i&lt;M;i++){
+        int u,v;
+        cin&gt;&gt;u&gt;&gt;v;
+        u--;v--;
+        G[u].push_back({v});
+        G[v].push_back({u});
+    }
+    vector&lt;int&gt;C(N,-1);
+    for(int i=0;i&lt;N;i++){
+        if(C[i] != -1)continue;
+        C[i]=0;
+        bfs(i,-1,G,C);
+    }
+    bool ok = true;
+    for(int i=0;i&lt;N;i++){
+        //cout&lt;&lt;i&lt;&lt;&quot; &quot;&lt;&lt;C[i]&lt;&lt;endl;
+        for(auto&amp;e:G[i]){
+            if(C[e.to] == C[i]){
+                ok = false;
+            }
+        }
+    }
+    cout&lt;&lt;(ok?&quot;Yes&quot;:&quot;No&quot;)&lt;&lt;endl;
+}
+</code></pre>
 
                     </main>
 
