@@ -180,6 +180,6 @@ vector<pair<long,long>> factor2(long x){
 }
 
 int main(){
-    cout<<divisor(1)<<endl;
+    cout<<divisor(1000000000000)<<endl;
 }
 
