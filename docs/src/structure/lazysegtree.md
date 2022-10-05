@@ -288,7 +288,7 @@ template<class T> class RSUQ{
 - $M$と二項演算$\bullet$がモノイド
 - $(x_1\circ x_2)\* p(m,n) = (x_1\*p(m,n/2))\circ(x_2\*p(m,n/2)) (x_1,x_2\in X)$ 
   - 子に伝播するときに半分ずつ伝播させるようなことができるか
-- $(x\* m\_1)*m\_2 = x\*(m\_1\times \_2)$
+- $(x\* m\_1)*m\_2 = x\*(m\_1\times m\_2)$
   - これが何なのか正直わからん(思考停止)
 
 なお，$p(m,n)$は高速に計算できる必要がある．
@@ -441,3 +441,28 @@ for(int i=0;i<N;i++){
 }
 seg.build();
 ```
+
+
+以下，応用例．
+## Range XOR Query
+- [ABC035 C - オセロ](https://atcoder.jp/contests/abc035/tasks/abc035_c)
+- [提出リンク](https://atcoder.jp/contests/abc035/submissions/35406973)
+
+黒と白を$0,1$とすると，オセロをひっくり返す操作は，1とのXORを取ることと等価である．
+なお，ひっくり返す過程を出力する必要はないので，imos法とかで偶奇を見る方法でも解けるし，こちらのほうが早い．オーバーキルである．
+```cpp
+using X = int;
+using M = int;
+auto fx = [](X a,X b){return a^b;};
+auto fa = [](X a,M b){return a^b;};
+auto fm = [](M a,M b){return a^b;};
+auto fp = [](M a,int b){return a;};
+X ex = 0; //xorの単位元
+M em = 0; //xorの単位元
+LazySegmentTree<X,M> seg(N,fx,fa,fm,fp,ex,em);
+```
+## Range add linear Query
+区間に等差数列を加算する．
+
+
+

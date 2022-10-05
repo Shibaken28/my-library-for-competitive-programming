@@ -34,8 +34,8 @@
 #define all(a) a.begin(),a.end()
 #define Pii pair<int,int>
 #define Pll pair<long,long>
-#define ZEROi 1000000001
-#define ZEROl 1000000000000000001
+#define INFi 1000000001
+#define INFl 1000000000000000001
 #define ll long long
 using namespace std;
 
@@ -123,126 +123,56 @@ template<class T> std::istream &operator>>(std::istream &in,vector<T>&A){
     return in;
 }
 
-template<typename X,typename M> struct LazySegmentTree{
-    public:
-        using FX = function<X(X, X)>;
-        using FA = function<X(X, M)>;
-        using FM = function<M(M, M)>;
-        using FP = function<M(M, int)>;
-        int n;
-        FX fx;
-        FA fa;
-        FM fm;
-        FP fp;
-        const X ex;
-        const M em;
-        vector<X> dat;
-        vector<M> lazy;
-    LazySegmentTree(int n_,FX fx_,FA fa_,FM fm_,FP fp_,X ex_,M em_):n(n_),fx(fx_),fa(fa_),fm(fm_),fp(fp_),ex(ex_),em(em_){
+template<typename T>
+struct RSQ{
+    int n;
+    vector<T>dat;
+    const T ZERO;
+    RSQ(int n_,T ZERO_):ZERO(ZERO_){
         n=1;
         while(n<n_)n*=2;
         //完全二分木にする
-        dat.assign(2*n-1,ex);
-        lazy.assign(2*n-1,em);
+        dat.assign(2*n-1,ZERO);
     }
-    void set(int k,X x){
-        dat[k+n-1]=x;
-    }
-    void build(){
-        for(int k=n-2;k>=0;k--){
-            dat[k]=fx(dat[2*k+1],dat[2*k+2]);
+    void update(int k,T a){
+        k+=n-1;// i番目は、配列上では n-1+i 番目に格納されている
+        dat[k]+=a;// 葉の更新
+        while(k>0){
+            k=(k-1)/2; //親のインデックス
+            // 子の和を計算
+            dat[k]=dat[k*2+1]+dat[k*2+2];
         }
     }
-    void update(int a,int b,M x,int k,int l,int r){
-        eval(k,r-l);
-        if(a <= l && r <= b){
-            lazy[k]= fm(lazy[k],x);
-            eval(k,r-l);
-        }else if(a < r && l < b){
-            update(a,b,x,k*2+1,l,(l+r)/2);
-            update(a,b,x,k*2+2,(l+r)/2,r);
-            dat[k]=fx(dat[k*2+1],dat[k*2+2]);
-        }
-    }
-    void update(int k,M a){
-        update(k,k+1,a,0,0,n);
-    }
-    void update(int a,int b,M x){
-        update(a,b,x,0,0,n);
-    }
-    void eval(int k,int len){
-        if(lazy[k]==em)return;
-        if(k<n-1){
-            lazy[k*2+1]=  fm(lazy[k*2+1],lazy[k]);
-            lazy[k*2+2] = fm(lazy[k*2+2],lazy[k]);
-        }
-        dat[k]=fa(dat[k],fp(lazy[k],len));
-        lazy[k]=em;
-    }
-    X query(int a,int b,int k,int l,int r){
-        eval(k,r-l);
-        if(r<=a||b<=l)return ex;//範囲外
+    
+    T query(int a,int b,int k,int l,int r){
+        if(r<=a||b<=l)return ZERO;//範囲外
         if(a<=l&&r<=b)return dat[k]; //範囲内である
         else{
-            X vl=query(a,b,k*2+1,l,(l+r)/2);
-            X vr=query(a,b,k*2+2,(l+r)/2,r);
-            return fx(vl,vr);
+            T vl=query(a,b,k*2+1,l,(l+r)/2);
+            T vr=query(a,b,k*2+2,(l+r)/2,r);
+            return vl+vr;
         }
     }
-    X query(int a,int b){
+    //[a,b)の総和を求める
+    T query(int a,int b){
         return query(a,b,0,0,n);
-    }
-    X get(int k){
-        return query(k,k+1);
     }
 };
 
+
 int main(void){
-    int N;cin>>N;
-    using X = int;
-    using M = int;
-    auto fx = [](X a,X b){return b;};
-    auto fa = [](X a,M b){return b;};
-    auto fm = [](M a,M b){return a|b;};
-    auto fp = [](M a,int b){return a;};
-    X ex = 0; //orの単位元
-    M em = 0; //orの単位元
-    LazySegmentTree<X,M> seg(N,fx,fa,fm,fp,ex,em);
-    string S;cin>>S;
-    for(int i=0;i<N;i++){
-        seg.set(i,0);//初期化
+    /*転倒数計算*/
+    int n;cin>>n;
+    vector<int>A(n);
+    for(int i=0;i<n;i++){
+        cin>>A[i];
+        A[i]--;
     }
-    seg.build();
-    for(int i=0;i<N;i++){
-        int a = S[i]-'a';
-        seg.update(i,1<<a);
+    RSQ<int>rsq(n,0);
+    long ans=0;
+    for(int i=0;i<n;i++){
+        ans+=rsq.query(A[i]+1,n);
+        rsq.update(A[i],1);
     }
-    int Q;cin>>Q;
-    vector<int>ret;
-    for(int i=0;i<Q;i++){
-        int com;cin>>com;
-        if(com==1){
-            long s;cin>>s;
-            char c;cin>>c;
-            int a = c-'a';
-            s--;
-            seg.update(s,1<<a);
-        }else{
-            int l,r;cin>>l>>r;
-            l--;r--;
-            int ans = seg.query(l,r+1);
-            int c=0;
-            for(int k=0;k<(1<<26);k++){
-                if(ans&(1<<k)){
-                    c++;
-                }
-            }
-            ret.push_back(c);
-        }
-    }
-    for(int a:ret){
-        cout<<a<<endl;
-    }
+    cout<<ans<<endl;
 }
-
-
