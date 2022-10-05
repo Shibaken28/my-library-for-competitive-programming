@@ -30,7 +30,7 @@
   - [❌SizedUnionFind](./structure/sizeduf.md) 
   - [❌WeightedUnionFind](./structure/weighteduf.md) 
   - [Segment Tree](./structure/segtree.md) 
-  - [❌Lazy Segment Tree](./structure/lazysegtree.md) 
+  - [Lazy Segment Tree](./structure/lazysegtree.md) 
   - [❌Binary Indexed Tree](./structure/BIT.md) 
   - [❌Binary Indexed Tree 2d](./structure/BIT2d.md) 
 
