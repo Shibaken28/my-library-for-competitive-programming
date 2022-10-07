@@ -1,5 +1,6 @@
 # C++が用意しているデータ構造
 
+- [競プロのための標準C++](https://zenn.dev/reputeless/books/standard-cpp-for-competitive-programming)
 
 ## `vector`
 - 配列．
