@@ -27,6 +27,7 @@
   - [❌木の頂点に番号を振る](./graph/treenum.md)
 
 - [データ構造](./structure/index.md)
+  - [C++が用意しているデータ構造](./structure/cpp.md)
   - [UnionFind](./structure/uf.md) 
   - [Segment Tree](./structure/segtree.md) 
   - [Lazy Segment Tree](./structure/lazysegtree.md) 

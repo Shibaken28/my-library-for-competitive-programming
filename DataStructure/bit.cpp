@@ -24,7 +24,6 @@
 #include <array>
 #include <fstream>
 #include <sstream>
-#include <list>
 
 //#include<atcoder/modint>
 //using namespace atcoder;
@@ -124,23 +123,37 @@ template<class T> std::istream &operator>>(std::istream &in,vector<T>&A){
     return in;
 }
 
+template <typename T>
+struct BIT{
+    int n;
+    vector<T> bit;
+    BIT(int n_):n(n_){
+        bit.resize(n+1);
+    }
 
+    void add(int i,T x){
+        i++;
+        while(i<=n){
+            bit[i]+=x;
+            i+=i&-i;
+        }
+    }
+    T sum(int i){
+        i++;
+        T s=0;
+        while(i>0){
+            s+=bit[i];
+            i-=i&-i;
+        }
+        return s;
+    }
+};
 
 int main(void){
-    list<int> ls;
-    ls.push_back(1);
-    ls.push_back(2);
-    ls.push_front(3);
-    ls.push_front(4);
-    for_each(ls.begin(),ls.end(),[](int a){
-        cout<<a<<" "; // 4 3 1 2
-    });
-    cout<<endl;
-    auto it = ls.begin();
-    it++;
-    ls.insert(it,5);
-    for_each(ls.begin(),ls.end(),[](int a){
-        cout<<a<<" "; // 4 5 3 1 2
-    });
-    cout<<endl;
+    std::cin.tie(0)->sync_with_stdio(0);
+    BIT<int> bit(5);
+    bit.add(1,1);
+    bit.add(2,2);
+    bit.add(3,3);
+    cout<<bit.sum(2)<<endl;
 }
