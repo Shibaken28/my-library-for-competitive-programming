@@ -27,13 +27,10 @@
   - [❌木の頂点に番号を振る](./graph/treenum.md)
 
 - [データ構造](./structure/index.md)
-  - [❌UnionFind](./structure/uf.md) 
-  - [❌SizedUnionFind](./structure/sizeduf.md) 
-  - [❌WeightedUnionFind](./structure/weighteduf.md) 
+  - [UnionFind](./structure/uf.md) 
   - [Segment Tree](./structure/segtree.md) 
   - [Lazy Segment Tree](./structure/lazysegtree.md) 
-  - [❌Binary Indexed Tree](./structure/BIT.md) 
-  - [❌Binary Indexed Tree 2d](./structure/BIT2d.md) 
+  - [Binary Indexed Tree](./structure/BIT.md) 
 
 - [列挙](./enum/index.md)
   - [順列組み合わせ列挙](./enum/per.md)
@@ -104,3 +101,6 @@
   - [❌中国剰余定理](./crypto/crt.md)
   - [GCD,LCM](./crypto/gcd.md)
   - [累乗根](./crypto/iroot.md)
+
+- [アルゴリズム検定](./past/index.md)
+  - [第1回アルゴリズム検定](./past/01.md)
