@@ -113,14 +113,5 @@
   - [❌牛ゲー](./famouse/mow.md)
   - [❌最長回文](./famouse/pal.md) 
 
-- [CTF(暗号)関連(Python)](./crypto/index.md)
-  - [long,bytes変換](./crypto/lb.md)
-  - [⚠️rho法素因数分解](./crypto/rho.md)
-  - [RSAテンプレ](./crypto/rsa.md)
-  - [GCD,LCM](./crypto/gcd.md)
-  - [累乗根](./crypto/iroot.md)
-  - [baby step giant step](./crypto/bsgs.md)
-  - [❌中国剰余定理](./crypto/crt.md)
-
 - [アルゴリズム検定](./past/index.md)
   - [⚠️第1回アルゴリズム検定](./past/01.md)
