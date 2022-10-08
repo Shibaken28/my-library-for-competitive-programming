@@ -26,9 +26,6 @@
 #include <sstream>
 #include <list>
 
-//#include<atcoder/modint>
-//using namespace atcoder;
-
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define rep1(i, n) for (int i = 1; i <= (int)(n); i++)
 #define repl(i,l,r) for (int i = l; i < (int)(r); i++)
@@ -124,23 +121,6 @@ template<class T> std::istream &operator>>(std::istream &in,vector<T>&A){
     return in;
 }
 
-
-
 int main(void){
-    list<int> ls;
-    ls.push_back(1);
-    ls.push_back(2);
-    ls.push_front(3);
-    ls.push_front(4);
-    for_each(ls.begin(),ls.end(),[](int a){
-        cout<<a<<" "; // 4 3 1 2
-    });
-    cout<<endl;
-    auto it = ls.begin();
-    it++;
-    ls.insert(it,5);
-    for_each(ls.begin(),ls.end(),[](int a){
-        cout<<a<<" "; // 4 5 3 1 2
-    });
-    cout<<endl;
+    
 }
