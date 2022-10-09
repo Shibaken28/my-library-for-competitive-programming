@@ -1,8 +1,9 @@
 # Summary
 
 - [このライブラリについて](./info.md)
-- [よくあるテクニック](./tips.md)
 - [C++の仕様や便利機能](./cpp.md)
+- [ちょっとしたコーディングテクニック](./tricks.md)
+- [よくある考察](./tips.md)
 - [よくあるバグ](./wa.md)
 - [データ構造](./structure/index.md)
   - [C++が用意しているデータ構造](./structure/cpp.md)
