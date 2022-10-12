@@ -34,7 +34,7 @@ struct LA{
     }
     void build(){
         ancestor[root][0] = root;
-        bfs(root,0,0);
+        bfs(root,root,0);
         for(int i=1;i<maxDepth;i++){
             for(int j=0;j<N;j++){
                 ancestor[j][i] = ancestor[ancestor[j][i-1]][i-1];
